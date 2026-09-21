@@ -12,7 +12,7 @@
 
 它适合持续运行而不是一次性检测：可按日、按周或手动采集，由本地计划任务或 Agent 代管执行、异常诊断与报告生成。API 密钥、付费和发布权限仍由使用者掌控。
 
-本项目源于恒利原生物科技官网 GEO 实践，并作为可复用的通用品牌监控工具开源。Apache-2.0 适用于代码；项目标识与公司商标不因代码开源而自动授权，详见 [TRADEMARKS.md](TRADEMARKS.md)。
+本项目由 **[桂林恒利原生物科技有限公司](https://heng-li-yuan.com/)**（**Guilin Hengliyuan Biotech Co., Ltd.**）在官网 GEO 实践中开发，并作为可复用的通用品牌监控工具开源。Apache-2.0 适用于代码；项目标识与公司商标不因代码开源而自动授权，详见 [TRADEMARKS.md](TRADEMARKS.md)。
 
 界面使用 MIT 许可的 [Tabler Icons](https://github.com/tabler/tabler-icons)，第三方许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
@@ -144,7 +144,7 @@ python3 scripts/release_check.py
 
 GEO Visibility Monitor is a self-hosted, evidence-bounded monitor for brand visibility in AI-generated answers. It runs a versioned question set across multiple OpenAI-compatible models and keeps brand mentions, explicit ranks, alias language, citations, failures and trends separately auditable.
 
-The project originated from GEO work for the Hengliyuan Biotech website and is open-sourced as a reusable brand-monitoring tool. Apache-2.0 covers the code; project identity and company trademarks are not automatically licensed with the code. See [TRADEMARKS.md](TRADEMARKS.md).
+The project was developed through website GEO work by **[Guilin Hengliyuan Biotech Co., Ltd.](https://heng-li-yuan.com/)**（**桂林恒利原生物科技有限公司**）and open-sourced as a reusable brand-monitoring tool. Apache-2.0 covers the code; project identity and company trademarks are not automatically licensed with the code. See [TRADEMARKS.md](TRADEMARKS.md).
 
 ### Community
 

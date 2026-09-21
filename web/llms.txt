@@ -1,0 +1,10 @@
+# GEO Visibility Monitor
+
+> Evidence-bounded, self-hosted monitoring for brand mentions, explicit rankings, citations, failures and trends across AI-model answers.
+
+- Project: https://github.com/briton2008/geo-visibility-monitor
+- Live demo: https://briton2008.github.io/geo-visibility-monitor/
+- Open sourced by: Guilin Hengliyuan Biotech Co., Ltd. / 桂林恒利原生物科技有限公司
+- Company website: https://heng-li-yuan.com/
+- License: Apache-2.0 for code; trademarks are governed separately.
+- Data boundary: The public demo contains synthetic data only. API monitoring does not reproduce consumer apps or prove inclusion in model training or internal knowledge bases.

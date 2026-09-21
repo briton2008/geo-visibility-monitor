@@ -35,10 +35,13 @@ PUBLIC_BRAND_METADATA = {
     Path(".codex-plugin/plugin.json"),
     Path(".claude-plugin/plugin.json"),
     Path(".claude-plugin/marketplace.json"),
+    Path("web/index.html"),
+    Path("web/language.js"),
 }
 PUBLIC_REPOSITORY_METADATA = {
     Path("README.md"),
     Path(".agents/plugins/marketplace.json"),
+    Path("web/index.html"),
 }
 
 
