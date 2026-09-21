@@ -6,6 +6,8 @@
 
 <p align="center"><a href="https://briton2008.github.io/geo-visibility-monitor/">在线演示 / Live demo</a></p>
 
+![GEO Visibility Monitor 项目效果图：大模型品牌可见度监测](assets/geo-visibility-monitor-cover.png)
+
 ## 中文
 
 一个可自托管、证据可回溯的 GEO（生成式引擎可见度）监测工具。它用固定问题集向多个 OpenAI-compatible 模型发起同题采集，分开记录品牌提及、明确排名、名称语言、引用来源、失败状态和历史趋势。
