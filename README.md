@@ -16,6 +16,22 @@
 
 界面使用 MIT 许可的 [Tabler Icons](https://github.com/tabler/tabler-icons)，第三方许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
+### 软件界面 / Interface
+
+以下均为电脑端横向界面，使用虚构演示数据，不代表任何真实品牌监测结果。
+
+**品牌概览 / Brand overview**
+
+![GEO Visibility Monitor 品牌概览桌面界面](assets/screenshots/dashboard-overview-zh.jpg)
+
+**趋势监控 / Trend monitoring**
+
+![GEO Visibility Monitor 趋势监控桌面界面](assets/screenshots/dashboard-trends-zh.jpg)
+
+**回答记录 / Answer records**
+
+![GEO Visibility Monitor 英文回答记录桌面界面](assets/screenshots/dashboard-answers-en.jpg)
+
 ### 加入交流
 
 扫描下方二维码加入 GEO 开源交流群，交流模型接入、监控口径和部署经验。当前二维码预计在 **2026-09-28 前有效**；到期后维护者只需替换同路径文件，README 与在线页面地址不变。
@@ -145,6 +161,8 @@ python3 scripts/release_check.py
 GEO Visibility Monitor is a self-hosted, evidence-bounded monitor for brand visibility in AI-generated answers. It runs a versioned question set across multiple OpenAI-compatible models and keeps brand mentions, explicit ranks, alias language, citations, failures and trends separately auditable.
 
 The project was developed through website GEO work by **[Guilin Hengliyuan Biotech Co., Ltd.](https://heng-li-yuan.com/)**（**桂林恒利原生物科技有限公司**）and open-sourced as a reusable brand-monitoring tool. Apache-2.0 covers the code; project identity and company trademarks are not automatically licensed with the code. See [TRADEMARKS.md](TRADEMARKS.md).
+
+Three landscape desktop screenshots are included in the [Interface gallery](#软件界面--interface). All screenshots use fictional demo data.
 
 ### Community
 
