@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GEO Visibility Monitor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="icon-home" viewBox="0 0 24 24"><path d="M5 12l-2 0l9 -9l9 9l-2 0"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"/><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"/></symbol>
+    <symbol id="icon-questions" viewBox="0 0 24 24"><path d="M15.02 19.52c-2.341 .736 -5 .606 -7.32 -.52l-4.7 1l1.3 -3.9c-2.324 -3.437 -1.426 -7.872 2.1 -10.374c3.526 -2.501 8.59 -2.296 11.845 .48c1.649 1.407 2.575 3.253 2.742 5.152"/><path d="M19 22v.01"/><path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483"/></symbol>
+    <symbol id="icon-trend" viewBox="0 0 24 24"><path d="M4 19l16 0"/><path d="M4 15l4 -6l4 2l4 -5l4 4"/></symbol>
+    <symbol id="icon-records" viewBox="0 0 24 24"><path d="M4 6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0"/><path d="M4 6v6a8 3 0 0 0 16 0v-6"/><path d="M4 12v6a8 3 0 0 0 16 0v-6"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065"/><path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"/></symbol>
+    <symbol id="icon-plug" viewBox="0 0 24 24"><path d="M7 12l5 5l-1.5 1.5a3.536 3.536 0 1 1 -5 -5l1.5 -1.5"/><path d="M17 12l-5 -5l1.5 -1.5a3.536 3.536 0 1 1 5 5l-1.5 1.5"/><path d="M3 21l2.5 -2.5"/><path d="M18.5 5.5l2.5 -2.5"/><path d="M10 11l-2 2"/><path d="M13 14l-2 2"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"/><path d="M7 11l5 5l5 -5"/><path d="M12 4l0 12"/></symbol>
+    <symbol id="icon-refresh" viewBox="0 0 24 24"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4"/><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4"/></symbol>
+    <symbol id="icon-bell" viewBox="0 0 24 24"><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"/><path d="M9 17v1a3 3 0 0 0 6 0v-1"/></symbol>
+    <symbol id="icon-target" viewBox="0 0 24 24"><path d="M11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0"/><path d="M7 12a5 5 0 1 0 10 0a5 5 0 1 0 -10 0"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"/></symbol>
+    <symbol id="icon-ranking" viewBox="0 0 24 24"><path d="M11 6h9"/><path d="M11 12h9"/><path d="M12 18h8"/><path d="M4 16a2 2 0 1 1 4 0c0 .591 -.5 1 -1 1.5l-3 2.5h4"/><path d="M6 10v-6l-2 2"/></symbol>
+    <symbol id="icon-score" viewBox="0 0 24 24"><path d="M18 21v-14"/><path d="M9 15l3 -3l3 3"/><path d="M15 10l3 -3l3 3"/><path d="M3 21l18 0"/><path d="M12 21l0 -9"/><path d="M3 6l3 -3l3 3"/><path d="M6 21v-18"/></symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24"><path d="M6 9l6 6l6 -6"/></symbol>
+    <symbol id="icon-info" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"/><path d="M12 9h.01"/><path d="M11 12h1v4h1"/></symbol>
+  </svg>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-mark"><img class="brand-icon" src="assets/logo.png" alt="GEO Visibility Monitor 标识"><div><strong>GEO 监测平台</strong><small>国内大模型可见度</small></div></div>
+      <nav aria-label="主导航">
+        <p class="nav-label">监测</p>
+        <button class="nav-item active" data-page="overview"><span><svg class="ui-icon"><use href="#icon-home"/></svg></span>品牌概览</button>
+        <button class="nav-item" disabled><span><svg class="ui-icon"><use href="#icon-questions"/></svg></span>用户提问 <em>5</em></button>
+        <p class="nav-label">数据</p>
+        <button class="nav-item" data-page="insights"><span><svg class="ui-icon"><use href="#icon-trend"/></svg></span>趋势监控</button>
+        <button class="nav-item" data-page="answers"><span><svg class="ui-icon"><use href="#icon-records"/></svg></span>大模型回答记录 <em>30</em></button>
+        <p class="nav-label">系统</p>
+        <button class="nav-item" data-page="settings"><span><svg class="ui-icon"><use href="#icon-settings"/></svg></span>监控配置</button>
+        <button class="nav-item" data-page="setup"><span><svg class="ui-icon"><use href="#icon-plug"/></svg></span>模型接入</button>
+        <button class="nav-item" disabled><span><svg class="ui-icon"><use href="#icon-download"/></svg></span>报告导出</button>
+      </nav>
+      <div class="sidebar-foot"><span class="status-dot"></span><div><strong>6 个模型已接入</strong><small>最近采集 2026-01-01</small></div></div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div><span class="crumb">示例品牌 GEO</span><span class="crumb-sep">/</span><strong id="pageTitle">品牌概览</strong></div>
+        <div class="top-actions"><div class="language-switch" aria-label="界面语言"><button type="button" data-language="zh" class="active">中文</button><button type="button" data-language="en">English</button></div><button aria-label="刷新"><svg class="ui-icon"><use href="#icon-refresh"/></svg></button><button aria-label="通知"><svg class="ui-icon"><use href="#icon-bell"/></svg></button><div class="avatar">G</div></div>
+      </header>
+
+      <section class="content page-panel" id="overviewPage">
+        <div class="demo-notice"><strong>演示数据</strong><span>当前页面使用完全虚构的示例品牌、模型和引用，不代表任何真实监测结果。</span></div>
+        <div class="page-head">
+          <div><h1>数据概览</h1><p>一览品牌在不同大模型中的曝光、排名与采集趋势</p></div>
+          <div class="updated">数据更新 <strong>2026-01-01 09:00</strong></div>
+        </div>
+
+        <section class="filters" aria-label="首页筛选">
+          <label><span>日期范围</span><button class="select">2026-01-01 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
+          <label><span>大模型</span><button class="select">全部 6 个模型 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
+          <label><span>提问分组</span><button class="select">全部分组 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
+          <label><span>竞品</span><button class="select">全部竞品 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
+          <label><span>提问标签</span><button class="select">全部标签 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
+        </section>
+
+        <section class="kpis">
+          <article class="card kpi"><span class="kpi-icon cyan"><svg class="ui-icon"><use href="#icon-target"/></svg></span><div><div class="kpi-title">品牌提及率 <button class="info" title="成功回答中提及品牌的比例" aria-label="品牌提及率说明"><svg class="ui-icon"><use href="#icon-info"/></svg></button></div><strong>40%</strong><p>有效样本 30/30 <span>单日基线</span></p></div></article>
+          <article class="card kpi"><span class="kpi-icon violet"><svg class="ui-icon"><use href="#icon-ranking"/></svg></span><div><div class="kpi-title">平均排名 <button class="info" title="仅统计有明确品牌位次的回答" aria-label="平均排名说明"><svg class="ui-icon"><use href="#icon-info"/></svg></button></div><strong>3.0</strong><p>有排名样本 6/30 <span>单日基线</span></p></div></article>
+          <article class="card kpi"><span class="kpi-icon amber"><svg class="ui-icon"><use href="#icon-score"/></svg></span><div><div class="kpi-title">透明复现分 <button class="info" title="transparent_replica_v1 是本项目公开、可解释的评分公式" aria-label="透明复现分说明"><svg class="ui-icon"><use href="#icon-info"/></svg></button></div><strong>18.5</strong><p>公式 v1 · 30/30 <span>单日基线</span></p></div></article>
+        </section>
+
+        <section class="card name-breakdown" aria-label="品牌名称提及拆分">
+          <div class="card-head"><div><h2>中文名与英文名提及</h2><p>任一名称出现都计入整体品牌提及，但分别展示，避免英文知名度掩盖中文名称表现</p></div><span class="overall-badge">整体 40%</span></div>
+          <div class="name-rate-grid">
+            <div class="name-rate"><div><span>中文名称</span><strong>40%</strong></div><div class="name-meter"><i style="width:40%"></i></div><small>示例品牌 / 示例天然食品 · 12/30 条回答</small></div>
+            <div class="name-rate"><div><span>英文名称</span><strong>0%</strong></div><div class="name-meter english"><i style="width:0%"></i></div><small>Example Naturals · 0/30 条回答</small></div>
+          </div>
+          <div class="diagnostic-line"><span>诊断</span><strong>国内样本已有中文名称认知，本轮未出现英文名称；二者不会互相覆盖。</strong></div>
+        </section>
+
+        <section class="chart-grid">
+          <article class="card trend-card">
+            <div class="card-head"><div><h2>品牌趋势</h2><p>仅展示通过校验的可比较采集日</p></div><div class="segmented" role="group" aria-label="趋势指标"><button class="active" data-metric="mention">整体提及</button><button data-metric="mentionZh">中文名</button><button data-metric="mentionEn">英文名</button><button data-metric="rank">平均排名</button><button data-metric="score">透明复现分</button></div></div>
+            <div class="chart-note"><span>单日基线</span>累计更多采集日后自动连成趋势</div>
+            <div class="line-chart" id="trendChart" aria-label="品牌趋势图"></div>
+          </article>
+          <article class="card compare-card">
+            <div class="card-head"><div><h2>模型对比</h2><p>六模型同题、同批次</p></div><button class="select compact">提及率 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></div>
+            <div class="model-bars" id="modelBars"></div>
+          </article>
+        </section>
+
+        <section class="bottom-grid">
+          <article class="card table-card groups"><div class="card-head"><div><h2>问题表现</h2><p>按监控问题汇总</p></div><button class="ghost">查看全部</button></div>
+            <div class="table-wrap"><table><thead><tr><th>问题</th><th>提及模型</th><th>结果</th></tr></thead><tbody>
+              <tr><td>这一品类有哪些值得了解的供应商？</td><td>0 / 6</td><td><span class="pill neutral">未提及</span></td></tr>
+              <tr><td>哪些供应商可以提供产品和应用方案？</td><td>6 / 6</td><td><span class="pill good">全模型提及</span></td></tr>
+              <tr><td>企业采购时应该比较哪些供应商？</td><td>0 / 6</td><td><span class="pill neutral">未提及</span></td></tr>
+              <tr><td>选择供应商时应该比较哪些指标？</td><td>0 / 6</td><td><span class="pill neutral">未提及</span></td></tr>
+              <tr><td>示例品牌主要提供哪些产品和服务？</td><td>6 / 6</td><td><span class="pill good">全模型提及</span></td></tr>
+            </tbody></table></div>
+          </article>
+          <article class="card table-card"><div class="card-head"><div><h2>模型透明复现分</h2><p>transparent_replica_v1</p></div></div>
+            <div class="score-list" id="scoreList"></div>
+          </article>
+          <article class="card evidence-card"><div class="card-head"><div><h2>引用证据</h2><p>模型引用与搜索辅助证据分开核验</p></div></div>
+            <div class="evidence-state"><span>!</span><strong>暂不生成总排行榜</strong><p>不同模型的引用映射能力可能不同；引用分为 0 不等于搜索证据为空，需回到回答记录核验。</p><button class="ghost">查看证据边界</button></div>
+          </article>
+        </section>
+        <footer><span>问题集：example-zh-cn-v1 · 5基准 / 0发现</span><span>数据口径：30 条虚构演示回答</span><span>评分口径：透明复现分 v1</span><span>未知与不可用不填 0</span></footer>
+      </section>
+
+      <section class="content page-panel hidden" id="insightsPage">
+        <div class="page-head">
+          <div><h1>趋势监控</h1><p>按同一问题集、同一模型口径持续采集，观察品牌可见度变化</p></div>
+          <div class="updated">时区 <strong id="monitorTimezone">Asia/Shanghai</strong></div>
+        </div>
+        <section class="monitor-grid">
+          <article class="card schedule-card">
+            <div class="card-head"><div><h2>采集计划</h2><p>计划配置与实际调度状态分开显示</p></div><span class="schedule-status" id="scheduleStatus">未启用</span></div>
+            <div class="schedule-main"><strong id="scheduleCadence">每天 09:00</strong><span id="scheduleScope">6 个模型 · 5 个问题</span></div>
+            <div class="schedule-meta"><span>每批计划调用</span><strong id="scheduleCalls">30 次搜索 + 30 次模型</strong></div>
+            <div class="rule-note"><strong>当前边界</strong><p id="scheduleBoundary">计划已写入项目，但没有安装系统定时器；不会自动产生费用。</p></div>
+          </article>
+          <section class="monitor-stats" id="monitorStats"></section>
+        </section>
+        <article class="card monitor-trend-card">
+          <div class="card-head monitor-head">
+            <div><h2>真实历史趋势</h2><p id="trendCoverage">仅使用问题文本或版本指纹一致的完整批次</p></div>
+            <div class="monitor-controls">
+              <label><span>模型</span><select id="trendModelFilter"><option value="all">全部模型</option></select></label>
+              <div class="segmented trend-segmented" role="group" aria-label="监控趋势指标">
+                <button class="active" data-monitor-metric="mentionRate">提及率</button>
+                <button data-monitor-metric="averageRank">平均排名</button>
+                <button data-monitor-metric="averageScore">透明分</button>
+              </div>
+            </div>
+          </div>
+          <div class="history-chart" id="historyTrendChart" aria-label="历史趋势图"></div>
+          <div class="trend-empty hidden" id="trendEmpty">还没有可比较的完整批次。</div>
+        </article>
+        <article class="card history-card">
+          <div class="card-head"><div><h2>批次历史</h2><p>失败和不完整批次保留原状态，不混入趋势或补成0</p></div><span class="history-count" id="historyCount"></span></div>
+          <div class="table-wrap"><table class="history-table"><thead><tr><th>采集时间</th><th>模型</th><th>状态</th><th>可用回答</th><th>提及率</th><th>平均排名</th><th>透明分</th><th>问题集</th></tr></thead><tbody id="historyRows"></tbody></table></div>
+        </article>
+      </section>
+
+      <section class="content page-panel hidden" id="answersPage">
+        <div class="page-head">
+          <div><h1>大模型回答记录</h1><p>每个指标都可以回到模型原始回答、排名依据和引用来源</p></div>
+          <div class="updated">问题集 <strong>example-zh-cn-v1</strong></div>
+        </div>
+        <section class="answer-stats" id="answerStats"></section>
+        <section class="card answer-toolbar" aria-label="回答记录筛选">
+          <label><span>模型</span><select id="answerModelFilter"><option value="all">全部模型</option></select></label>
+          <label><span>结果</span><select id="answerStateFilter"><option value="all">全部结果</option><option value="mentioned">已提及</option><option value="not_mentioned">未提及</option><option value="review">待复核</option></select></label>
+          <label class="answer-search"><span>搜索问题</span><input id="answerSearch" placeholder="输入问题关键词" /></label>
+        </section>
+        <section class="answer-layout">
+          <article class="card answer-list-card">
+            <div class="card-head"><div><h2>采集记录</h2><p id="answerCountLabel">30 条真实回答</p></div></div>
+            <div class="table-wrap answer-table-wrap"><table class="answer-table"><thead><tr><th>模型与问题</th><th>提及</th><th>排名</th><th>身份</th></tr></thead><tbody id="answerRows"></tbody></table></div>
+            <div class="empty-state hidden" id="answerEmpty">当前筛选条件下没有回答记录。</div>
+          </article>
+          <article class="card answer-detail" id="answerDetail" aria-live="polite"></article>
+        </section>
+      </section>
+
+      <section class="content page-panel hidden" id="settingsPage">
+        <div class="page-head">
+          <div><h1>监控配置</h1><p>品牌名称与别名会共同参与提及识别，并在回答记录中分别展示</p></div>
+          <div class="save-state" id="saveState">已读取当前品牌配置</div>
+        </div>
+        <section class="settings-layout">
+          <article class="card settings-card">
+            <div class="card-head"><div><h2>品牌识别名称</h2><p>主品牌名必填；中文简称、英文名、旧称均可作为别名</p></div></div>
+            <label class="field"><span>主品牌名</span><input id="brandName" value="示例天然食品有限公司" /></label>
+            <div class="field"><span>品牌别名 / 英文名</span><div class="alias-editor" id="aliasEditor"></div></div>
+            <div class="add-alias"><input id="aliasInput" placeholder="例如：Hengli Yuan" /><button id="addAlias" type="button">＋ 添加名称</button></div>
+            <div class="profile-divider"><span>客户是做什么的</span></div>
+            <label class="field"><span>业务简介（必填，一句话即可）</span><textarea id="businessDescription" rows="3" placeholder="例如：面向食品饮料企业的天然甜味剂原料供应商"></textarea></label>
+            <label class="field"><span>核心产品或服务（用逗号分隔）</span><input id="coreOfferings" placeholder="例如：罗汉果提取物，复配甜味剂，OEM/ODM服务" /></label>
+            <label class="field"><span>主要市场（用逗号分隔）</span><input id="primaryMarkets" placeholder="例如：中国，东南亚，欧洲" /></label>
+            <div class="profile-divider"><span>官方身份资料</span></div>
+            <label class="field"><span>官方网站（必填）</span><input id="officialWebsite" type="url" placeholder="https://example.com" /></label>
+            <label class="field"><span>公司所在地</span><input id="headquarters" placeholder="例如：中国广西桂林" /></label>
+            <label class="field"><span>其他官方渠道（用逗号分隔）</span><input id="officialChannels" placeholder="例如：微信公众号，LinkedIn公司主页" /></label>
+            <div class="rule-note"><strong>使用边界</strong><p>品牌名称用于提及识别；业务信息用于生成问题、选择竞品和形成诊断，不会直接写进模型回答，因此不会制造虚假提及。</p></div>
+            <div class="settings-actions"><button class="primary" id="saveBrand" type="button">保存品牌配置</button><button class="ghost" id="resetBrand" type="button">恢复当前配置</button></div>
+          </article>
+          <article class="card preview-card">
+            <div class="card-head"><div><h2>识别预览</h2><p>客户填写的名称都会单独查看</p></div></div>
+            <div class="preview-answer">“在候选供应商中，<mark>示例品牌</mark>提供相关产品。英文资料也可能使用 <mark>Example Naturals</mark>。”</div>
+            <div class="match-row"><span>本条是否计入提及</span><strong class="yes">是</strong></div>
+            <div class="match-row"><span>命中名称</span><strong id="matchPreview">示例品牌 · Example Naturals</strong></div>
+            <div class="match-row"><span>身份佐证</span><strong id="identityPreview">官网域名 · 完整公司名 · 业务上下文</strong></div>
+            <div class="match-row"><span>仅名称、无佐证</span><strong class="warn">标记复核</strong></div>
+            <p class="preview-help">回答记录中可展开查看每个名称的命中次数和原文片段。</p>
+          </article>
+        </section>
+        <article class="card cadence-settings">
+          <div class="card-head"><div><h2>监控节奏</h2><p>客户可以选择多久查询一次；保存后与采集器共用同一配置</p></div><span class="save-state" id="monitorSaveState">正在读取配置</span></div>
+          <div class="cadence-grid">
+            <label class="switch-field"><span>启用自动计划</span><input id="monitorEnabled" type="checkbox" /><i aria-hidden="true"></i><small>只有外部调度器已安装时才会自动运行</small></label>
+            <label class="field compact-field"><span>监控节奏</span><select id="monitorCadence"><option value="daily">每天一次</option><option value="weekly">每周一次</option><option value="manual">仅手动运行</option></select></label>
+            <label class="field compact-field" id="monitorWeekdayField"><span>每周执行日</span><select id="monitorWeekday"><option value="0">星期一</option><option value="1">星期二</option><option value="2">星期三</option><option value="3">星期四</option><option value="4">星期五</option><option value="5">星期六</option><option value="6">星期日</option></select></label>
+            <label class="field compact-field" id="monitorTimeField"><span>执行时间</span><input id="monitorTime" type="time" value="09:00" /></label>
+          </div>
+          <div class="model-picker"><span>参与模型</span><div id="monitorProviderOptions"></div></div>
+          <div class="cadence-summary" id="cadenceSummary">每天09:00 · 6个模型 · 每批30次搜索和30次模型调用</div>
+          <div class="settings-actions"><button class="primary" id="saveMonitoring" type="button">保存监控节奏</button></div>
+        </article>
+
+        <article class="card budget-settings">
+          <div class="card-head"><div><h2>调用与预算估算</h2><p>按当前问题数、模型数和监控节奏估算；价格由使用者按供应商账单填写</p></div><span class="estimate-badge">估算值</span></div>
+          <div class="budget-layout">
+            <div class="budget-inputs">
+              <label class="field compact-field"><span>平均输入 Token / 次</span><input id="budgetInputTokens" type="number" min="0" step="100" value="3500" /></label>
+              <label class="field compact-field"><span>平均输出 Token / 次</span><input id="budgetOutputTokens" type="number" min="0" step="100" value="900" /></label>
+              <label class="field compact-field"><span>模型输入价（元 / 百万 Token）</span><input id="budgetInputRate" type="number" min="0" step="0.01" placeholder="未填写则 unavailable" /></label>
+              <label class="field compact-field"><span>模型输出价（元 / 百万 Token）</span><input id="budgetOutputRate" type="number" min="0" step="0.01" placeholder="未填写则 unavailable" /></label>
+              <label class="field compact-field"><span>搜索价（元 / 千次）</span><input id="budgetSearchRate" type="number" min="0" step="0.01" placeholder="未填写则 unavailable" /></label>
+              <label class="field compact-field"><span>月预算上限（元，可选）</span><input id="budgetLimit" type="number" min="0" step="1" placeholder="例如：100" /></label>
+            </div>
+            <div class="budget-results" aria-live="polite">
+              <div><span>每批模型 / 搜索调用</span><strong id="budgetBatchCalls">unavailable</strong></div>
+              <div><span>预计每月运行</span><strong id="budgetMonthlyRuns">unavailable</strong></div>
+              <div><span>预计每月模型调用</span><strong id="budgetMonthlyModelCalls">unavailable</strong></div>
+              <div><span>预计每月搜索调用</span><strong id="budgetMonthlySearchCalls">unavailable</strong></div>
+              <div class="budget-total"><span>预计月费用</span><strong id="budgetMonthlyCost">unavailable</strong><small id="budgetStatus">填写实际单价后计算</small></div>
+            </div>
+          </div>
+          <div class="rule-note"><strong>费用边界</strong><p>这是预算辅助值，不是账单。不同模型的缓存、深度思考、工具调用和供应商计费规则可能不同，最终以供应商实际 usage 与账单为准。</p></div>
+        </article>
+      </section>
+
+      <section class="content page-panel hidden" id="setupPage">
+        <div class="page-head">
+          <div><h1>模型接入</h1><p>像成熟开源项目一样，从开通账号到连通性检查，每一步都可复制、可验证</p></div>
+          <a class="docs-link" href="/PROVIDERS.md" target="_blank" rel="noreferrer">打开完整接入文档 ↗</a>
+        </div>
+        <section class="setup-route card">
+          <div class="route-copy"><span class="eyebrow">推荐组合</span><h2>百炼作为国产模型底座，方舟补豆包，腾讯 WSA 提供独立搜索证据</h2><p>默认选择 Flash / Lite / Turbo，关闭可选深度思考；强制思考模型应替换为快速版本，而不是只修改名称。</p></div>
+          <div class="route-stack"><span>1 · 选择平台</span><i></i><span>2 · 创建 API Key</span><i></i><span>3 · 写入配置</span><i></i><span>4 · Doctor 验证</span></div>
+        </section>
+        <section class="provider-summary" id="providerSummary"></section>
+        <section class="provider-guide-grid" id="providerGuideGrid"></section>
+        <article class="card setup-checklist">
+          <div><span class="eyebrow">统一验证</span><h2>配置完成后运行</h2><p>Doctor 只检查配置与凭据是否可用；真实采集需要单独执行，不会因为打开页面自动产生费用。</p></div>
+          <pre><code>python3 domestic_geo.py doctor
+python3 domestic_geo.py run --provider &lt;provider-id&gt;
+python3 build_web_data.py</code></pre>
+        </article>
+        <section class="community-card card" aria-labelledby="communityTitle">
+          <div class="community-copy"><span class="eyebrow">加入交流</span><h2 id="communityTitle">GEO 开源交流群</h2><p>扫码加入微信群，交流模型接入、监控口径和部署经验。二维码到期后只需替换 <code>assets/community-wechat.jpg</code>，页面地址保持不变。</p><small>当前二维码由微信生成，预计在 2026-09-28 前有效；若已失效，请等待仓库更新。</small></div>
+          <a class="community-qr" href="assets/community-wechat.jpg" target="_blank" rel="noreferrer" aria-label="打开微信群二维码大图"><img src="assets/community-wechat.jpg" alt="GEO 开源交流群微信群二维码，当前预计 2026-09-28 前有效"></a>
+        </section>
+        <div class="setup-boundary"><strong>重要：</strong>API 结果用于可复现监测，不等于各模型消费端 App、网页端或内部知识库的完全复刻。</div>
+      </section>
+    </main>
+  </div>
+  <script src="answer-data.js"></script>
+  <script src="app.js"></script>
+  <script src="language.js"></script>
+</body>
+</html>

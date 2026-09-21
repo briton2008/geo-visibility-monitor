@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Generate deterministic demo and local config
+        run: |
+          python3 scripts/generate_demo_data.py
+          python3 scripts/bootstrap.py
+      - name: Python checks
+        run: |
+          python3 -m compileall -q .
+          python3 -m unittest discover -s tests -v
+      - name: JavaScript syntax
+        run: |
+          node --check web/app.js
+          node --check web/language.js
+          node --check web/answer-data.example.js
+      - name: Release gate
+        run: python3 scripts/release_check.py

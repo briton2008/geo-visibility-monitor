@@ -1,0 +1,6 @@
+{
+  "name": "geo-visibility-monitor",
+  "version": "0.1.0",
+  "description": "Self-hosted GEO visibility monitoring for brands across AI models.",
+  "contextFileName": "AGENTS.md"
+}

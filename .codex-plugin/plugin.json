@@ -1,0 +1,27 @@
+{
+  "name": "geo-visibility-monitor",
+  "version": "0.1.0",
+  "description": "Operate a self-hosted, evidence-bounded GEO visibility monitor for brands across AI models.",
+  "author": {
+    "name": "Hengliyuan Open Source Contributors"
+  },
+  "license": "Apache-2.0",
+  "keywords": ["geo", "ai-visibility", "brand-monitoring", "llm", "analytics"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "GEO Visibility Monitor",
+    "shortDescription": "Monitor brand visibility across AI answers",
+    "longDescription": "Configure, run, diagnose and report evidence-bounded GEO visibility monitoring without hiding failed samples or unknown data.",
+    "developerName": "Hengliyuan Open Source Contributors",
+    "category": "Productivity",
+    "capabilities": ["Instructions", "Local monitoring", "Reporting"],
+    "defaultPrompt": [
+      "Set up GEO monitoring for my brand.",
+      "Run a dry check of my monitoring configuration.",
+      "Diagnose this GEO visibility report."
+    ],
+    "brandColor": "#0F8B75",
+    "composerIcon": "./assets/logo.png",
+    "logo": "./assets/logo.png"
+  }
+}

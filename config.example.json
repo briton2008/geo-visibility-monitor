@@ -1,0 +1,65 @@
+{
+  "project": "example-geo-monitor",
+  "brand": {
+    "name": "示例天然食品有限公司",
+    "aliases": ["示例品牌", "Example Naturals"],
+    "business_description": "面向食品饮料企业的示例原料供应商",
+    "core_offerings": ["示例产品", "应用支持"],
+    "primary_markets": ["中国"],
+    "official_website": "https://example.com",
+    "headquarters": "中国",
+    "official_channels": [],
+    "official_domains": ["example.com"]
+  },
+  "competitors": ["示例竞品甲", "示例竞品乙"],
+  "question_sets": {
+    "active_version": "example-zh-cn-v1",
+    "versions": [
+      {
+        "id": "example-zh-cn-v1",
+        "status": "active",
+        "created_at": "2026-01-01",
+        "language": "zh-CN",
+        "market": "CN",
+        "description": "虚构演示问题集；正式使用前请复制为自己的版本。",
+        "questions": [
+          {"id": "category-001", "track": "benchmark", "intent": "category_discovery", "text": "这一品类有哪些值得了解的供应商？", "tags": ["品类发现"], "enabled": true},
+          {"id": "solution-001", "track": "benchmark", "intent": "solution_supplier", "text": "哪些供应商可以提供产品和应用方案？", "tags": ["解决方案"], "enabled": true},
+          {"id": "procurement-001", "track": "benchmark", "intent": "procurement", "text": "企业采购时应该比较哪些供应商？", "tags": ["采购"], "enabled": true},
+          {"id": "comparison-001", "track": "benchmark", "intent": "comparison", "text": "选择供应商时应该比较哪些指标？", "tags": ["比较"], "enabled": true},
+          {"id": "brand-001", "track": "benchmark", "intent": "brand_knowledge", "text": "示例天然食品有限公司主要提供哪些产品和服务？", "tags": ["品牌认知"], "enabled": true}
+        ]
+      }
+    ]
+  },
+  "search": {
+    "endpoint": "https://api.wsa.cloud.tencent.com/SearchPro",
+    "mode": 0,
+    "results_per_prompt": 10,
+    "timeout_seconds": 45
+  },
+  "default_model_provider": "provider-a",
+  "models": {
+    "provider-a": {"label": "示例模型 A", "endpoint": "https://api.example.com/v1/chat/completions", "name": "replace-with-model-a", "env_key": "MODEL_A_API_KEY", "keychain_service": "geo-monitor-model-a", "temperature": 0, "max_tokens": 2200, "timeout_seconds": 120},
+    "provider-b": {"label": "示例模型 B", "endpoint": "https://api.example.com/v1/chat/completions", "name": "replace-with-model-b", "env_key": "MODEL_B_API_KEY", "keychain_service": "geo-monitor-model-b", "temperature": 0, "max_tokens": 2200, "timeout_seconds": 120},
+    "provider-c": {"label": "示例模型 C", "endpoint": "https://api.example.com/v1/chat/completions", "name": "replace-with-model-c", "env_key": "MODEL_C_API_KEY", "keychain_service": "geo-monitor-model-c", "temperature": 0, "max_tokens": 2200, "timeout_seconds": 120},
+    "provider-d": {"label": "示例模型 D", "endpoint": "https://api.example.com/v1/chat/completions", "name": "replace-with-model-d", "env_key": "MODEL_D_API_KEY", "keychain_service": "geo-monitor-model-d", "temperature": 0, "max_tokens": 2200, "timeout_seconds": 120},
+    "provider-e": {"label": "示例模型 E", "endpoint": "https://api.example.com/v1/chat/completions", "name": "replace-with-model-e", "env_key": "MODEL_E_API_KEY", "keychain_service": "geo-monitor-model-e", "temperature": 0, "max_tokens": 2200, "timeout_seconds": 120},
+    "provider-f": {"label": "示例模型 F", "endpoint": "https://api.example.com/v1/chat/completions", "name": "replace-with-model-f", "env_key": "MODEL_F_API_KEY", "keychain_service": "geo-monitor-model-f", "temperature": 0, "max_tokens": 2200, "timeout_seconds": 120}
+  },
+  "monitoring": {
+    "enabled": false,
+    "cadence": "weekly",
+    "time": "09:00",
+    "timezone": "Asia/Shanghai",
+    "weekday": 0,
+    "providers": ["provider-a", "provider-b", "provider-c", "provider-d", "provider-e", "provider-f"],
+    "scheduler_status": "not_installed"
+  },
+  "scoring": {
+    "name": "transparent_replica_v1",
+    "rank_weight": 0.7,
+    "citation_weight": 0.2,
+    "official_source_weight": 0.1
+  }
+}

@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+.env.*
+*.key
+*.pem
+config.json
+runs/
+runs-by-provider/
+state/
+web/answer-data.js
+dist/
+.coverage
+.pytest_cache/

@@ -1,0 +1,7 @@
+interface:
+  display_name: "GEO Visibility Monitor"
+  short_description: "Run auditable AI brand visibility monitoring"
+  brand_color: "#0F8B75"
+  default_prompt: "Use $geo-visibility-monitor to inspect and safely run my brand monitoring setup."
+policy:
+  allow_implicit_invocation: true
