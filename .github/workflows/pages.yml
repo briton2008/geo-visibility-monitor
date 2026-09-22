@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
       - name: Build static demo
         run: |
           mkdir -p _site/assets
@@ -31,9 +31,9 @@ jobs:
           cp assets/logo.png assets/community-wechat.jpg assets/geo-visibility-monitor-cover.png _site/assets/
           cp PROVIDERS.md _site/PROVIDERS.md
           touch _site/.nojekyll
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
