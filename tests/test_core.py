@@ -332,7 +332,7 @@ class DomesticGeoTests(unittest.TestCase):
         self.assertEqual(summary["english_name_mention_rate_percent"], 50.0)
 
     def test_monitoring_plan_counts_calls_without_executing(self):
-        config = geo.read_json(geo.DEFAULT_CONFIG)
+        config = geo.read_json(geo.ROOT / "config.example.json")
         plan = monitoring_runner.monitoring_plan(config)
         self.assertFalse(plan["enabled"])
         self.assertEqual(plan["question_count"], 5)
@@ -384,7 +384,7 @@ class DomesticGeoTests(unittest.TestCase):
         self.assertFalse(monitoring_runner.is_due(plan, {}, now))
 
     def test_monitoring_api_validation_preserves_only_allowed_fields(self):
-        config = geo.read_json(geo.DEFAULT_CONFIG)
+        config = geo.read_json(geo.ROOT / "config.example.json")
         payload = {
             "enabled": True,
             "cadence": "weekly",

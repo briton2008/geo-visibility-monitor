@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = [
     "README.md",
+    "CHANGELOG.md",
     "LICENSE",
     "SECURITY.md",
     "CONTRIBUTING.md",
@@ -40,6 +41,7 @@ PUBLIC_BRAND_METADATA = {
 }
 PUBLIC_REPOSITORY_METADATA = {
     Path("README.md"),
+    Path("CHANGELOG.md"),
     Path(".agents/plugins/marketplace.json"),
     Path("web/index.html"),
 }
@@ -60,10 +62,19 @@ def main() -> int:
         fail("example config must use only example.com brand identity")
 
     findings = []
-    for path in ROOT.rglob("*"):
+    tracked = subprocess.run(
+        ["git", "ls-files", "-z"],
+        cwd=ROOT,
+        check=True,
+        capture_output=True,
+    ).stdout.decode("utf-8").split("\0")
+    for relative_text in tracked:
+        if not relative_text:
+            continue
+        relative = Path(relative_text)
+        path = ROOT / relative
         if not path.is_file() or path.suffix not in TEXT_SUFFIXES:
             continue
-        relative = path.relative_to(ROOT)
         if relative == Path("scripts/release_check.py") or any(part in {".git", ".venv", "__pycache__"} for part in relative.parts):
             continue
         text = path.read_text(encoding="utf-8", errors="replace")

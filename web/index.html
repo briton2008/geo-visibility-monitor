@@ -11,7 +11,14 @@
   <meta property="og:title" content="GEO Visibility Monitor｜Hengliyuan Open Source" />
   <meta property="og:description" content="Evidence-bounded GEO visibility monitoring, open-sourced by Guilin Hengliyuan Biotech Co., Ltd." />
   <meta property="og:url" content="https://briton2008.github.io/geo-visibility-monitor/" />
-  <meta property="og:image" content="https://briton2008.github.io/geo-visibility-monitor/assets/logo.png" />
+  <meta property="og:image" content="https://briton2008.github.io/geo-visibility-monitor/assets/geo-visibility-monitor-cover.png" />
+  <meta property="og:image:width" content="1672" />
+  <meta property="og:image:height" content="941" />
+  <meta property="og:image:alt" content="GEO Visibility Monitor 大模型品牌可见度监测项目效果图" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="GEO Visibility Monitor" />
+  <meta name="twitter:description" content="Self-hosted, evidence-bounded GEO visibility monitoring across AI models." />
+  <meta name="twitter:image" content="https://briton2008.github.io/geo-visibility-monitor/assets/geo-visibility-monitor-cover.png" />
   <link rel="stylesheet" href="styles.css" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"GEO Visibility Monitor","applicationCategory":"BusinessApplication","operatingSystem":"Cross-platform","url":"https://briton2008.github.io/geo-visibility-monitor/","codeRepository":"https://github.com/briton2008/geo-visibility-monitor","license":"https://www.apache.org/licenses/LICENSE-2.0","author":{"@type":"Organization","name":"Guilin Hengliyuan Biotech Co., Ltd.","alternateName":"桂林恒利原生物科技有限公司","url":"https://heng-li-yuan.com/"}}</script>
 </head>
@@ -39,26 +46,26 @@
       <nav aria-label="主导航">
         <p class="nav-label">监测</p>
         <button class="nav-item active" data-page="overview"><span><svg class="ui-icon"><use href="#icon-home"/></svg></span>品牌概览</button>
-        <button class="nav-item" disabled><span><svg class="ui-icon"><use href="#icon-questions"/></svg></span>用户提问 <em>5</em></button>
+        <button class="nav-item" disabled><span><svg class="ui-icon"><use href="#icon-questions"/></svg></span>用户提问 <em id="sidebarQuestionCount">5</em></button>
         <p class="nav-label">数据</p>
         <button class="nav-item" data-page="insights"><span><svg class="ui-icon"><use href="#icon-trend"/></svg></span>趋势监控</button>
-        <button class="nav-item" data-page="answers"><span><svg class="ui-icon"><use href="#icon-records"/></svg></span>大模型回答记录 <em>30</em></button>
+        <button class="nav-item" data-page="answers"><span><svg class="ui-icon"><use href="#icon-records"/></svg></span>大模型回答记录 <em id="sidebarAnswerCount">30</em></button>
         <p class="nav-label">系统</p>
         <button class="nav-item" data-page="settings"><span><svg class="ui-icon"><use href="#icon-settings"/></svg></span>监控配置</button>
         <button class="nav-item" data-page="setup"><span><svg class="ui-icon"><use href="#icon-plug"/></svg></span>模型接入</button>
         <button class="nav-item" disabled><span><svg class="ui-icon"><use href="#icon-download"/></svg></span>报告导出</button>
       </nav>
-      <div class="sidebar-foot"><span class="status-dot"></span><div><strong>6 个模型已接入</strong><small>最近采集 2026-01-01</small></div></div>
+      <div class="sidebar-foot"><span class="status-dot"></span><div><strong id="sidebarProviderCount">6 个模型已接入</strong><small id="sidebarLatestDate">最近采集 2026-01-01</small></div></div>
     </aside>
 
     <main>
       <header class="topbar">
-        <div><span class="crumb">示例品牌 GEO</span><span class="crumb-sep">/</span><strong id="pageTitle">品牌概览</strong></div>
+        <div><span class="crumb" id="brandCrumb">示例品牌 GEO</span><span class="crumb-sep">/</span><strong id="pageTitle">品牌概览</strong></div>
         <div class="top-actions"><div class="language-switch" aria-label="界面语言"><button type="button" data-language="zh" class="active">中文</button><button type="button" data-language="en">English</button></div><button aria-label="刷新"><svg class="ui-icon"><use href="#icon-refresh"/></svg></button><button aria-label="通知"><svg class="ui-icon"><use href="#icon-bell"/></svg></button><div class="avatar">G</div></div>
       </header>
 
       <section class="content page-panel" id="overviewPage">
-        <div class="demo-notice"><strong>演示数据</strong><span>当前页面使用完全虚构的示例品牌、模型和引用，不代表任何真实监测结果。</span></div>
+        <div class="demo-notice" id="dataNotice"><strong id="dataNoticeTitle">演示数据</strong><span id="dataNoticeText">当前页面使用完全虚构的示例品牌、模型和引用，不代表任何真实监测结果。</span></div>
         <section class="project-intro card" aria-labelledby="projectIntroTitle">
           <div class="project-intro-copy">
             <span class="eyebrow">开源项目简介</span>
@@ -73,30 +80,30 @@
         </section>
         <div class="page-head">
           <div><h1>数据概览</h1><p>一览品牌在不同大模型中的曝光、排名与采集趋势</p></div>
-          <div class="updated">数据更新 <strong>2026-01-01 09:00</strong></div>
+          <div class="updated">数据更新 <strong id="overviewUpdatedAt">2026-01-01 09:00</strong></div>
         </div>
 
         <section class="filters" aria-label="首页筛选">
-          <label><span>日期范围</span><button class="select">2026-01-01 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
-          <label><span>大模型</span><button class="select">全部 6 个模型 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
+          <label><span>日期范围</span><button class="select"><span id="overviewDateFilter">2026-01-01</span> <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
+          <label><span>大模型</span><button class="select"><span id="overviewModelFilter">全部 6 个模型</span> <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
           <label><span>提问分组</span><button class="select">全部分组 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
           <label><span>竞品</span><button class="select">全部竞品 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
           <label><span>提问标签</span><button class="select">全部标签 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></label>
         </section>
 
         <section class="kpis">
-          <article class="card kpi"><span class="kpi-icon cyan"><svg class="ui-icon"><use href="#icon-target"/></svg></span><div><div class="kpi-title">品牌提及率 <button class="info" title="成功回答中提及品牌的比例" aria-label="品牌提及率说明"><svg class="ui-icon"><use href="#icon-info"/></svg></button></div><strong>40%</strong><p>有效样本 30/30 <span>单日基线</span></p></div></article>
-          <article class="card kpi"><span class="kpi-icon violet"><svg class="ui-icon"><use href="#icon-ranking"/></svg></span><div><div class="kpi-title">平均排名 <button class="info" title="仅统计有明确品牌位次的回答" aria-label="平均排名说明"><svg class="ui-icon"><use href="#icon-info"/></svg></button></div><strong>3.0</strong><p>有排名样本 6/30 <span>单日基线</span></p></div></article>
-          <article class="card kpi"><span class="kpi-icon amber"><svg class="ui-icon"><use href="#icon-score"/></svg></span><div><div class="kpi-title">透明复现分 <button class="info" title="transparent_replica_v1 是本项目公开、可解释的评分公式" aria-label="透明复现分说明"><svg class="ui-icon"><use href="#icon-info"/></svg></button></div><strong>18.5</strong><p>公式 v1 · 30/30 <span>单日基线</span></p></div></article>
+          <article class="card kpi"><span class="kpi-icon cyan"><svg class="ui-icon"><use href="#icon-target"/></svg></span><div><div class="kpi-title">品牌提及率 <button class="info" title="成功回答中提及品牌的比例" aria-label="品牌提及率说明"><svg class="ui-icon"><use href="#icon-info"/></svg></button></div><strong id="kpiMention">40%</strong><p id="kpiMentionMeta">有效样本 30/30 <span>单日基线</span></p></div></article>
+          <article class="card kpi"><span class="kpi-icon violet"><svg class="ui-icon"><use href="#icon-ranking"/></svg></span><div><div class="kpi-title">平均排名 <button class="info" title="仅统计有明确品牌位次的回答" aria-label="平均排名说明"><svg class="ui-icon"><use href="#icon-info"/></svg></button></div><strong id="kpiRank">3.0</strong><p id="kpiRankMeta">有排名样本 6/30 <span>单日基线</span></p></div></article>
+          <article class="card kpi"><span class="kpi-icon amber"><svg class="ui-icon"><use href="#icon-score"/></svg></span><div><div class="kpi-title">透明复现分 <button class="info" title="transparent_replica_v1 是本项目公开、可解释的评分公式" aria-label="透明复现分说明"><svg class="ui-icon"><use href="#icon-info"/></svg></button></div><strong id="kpiScore">18.5</strong><p id="kpiScoreMeta">公式 v1 · 30/30 <span>单日基线</span></p></div></article>
         </section>
 
         <section class="card name-breakdown" aria-label="品牌名称提及拆分">
-          <div class="card-head"><div><h2>中文名与英文名提及</h2><p>任一名称出现都计入整体品牌提及，但分别展示，避免英文知名度掩盖中文名称表现</p></div><span class="overall-badge">整体 40%</span></div>
+          <div class="card-head"><div><h2>中文名与英文名提及</h2><p>任一名称出现都计入整体品牌提及，但分别展示，避免英文知名度掩盖中文名称表现</p></div><span class="overall-badge" id="overallMention">整体 40%</span></div>
           <div class="name-rate-grid">
-            <div class="name-rate"><div><span>中文名称</span><strong>40%</strong></div><div class="name-meter"><i style="width:40%"></i></div><small>示例品牌 / 示例天然食品 · 12/30 条回答</small></div>
-            <div class="name-rate"><div><span>英文名称</span><strong>0%</strong></div><div class="name-meter english"><i style="width:0%"></i></div><small>Example Naturals · 0/30 条回答</small></div>
+            <div class="name-rate"><div><span>中文名称</span><strong id="zhMentionRate">40%</strong></div><div class="name-meter"><i id="zhMentionBar" style="width:40%"></i></div><small id="zhMentionMeta">示例品牌 / 示例天然食品 · 12/30 条回答</small></div>
+            <div class="name-rate"><div><span>英文名称</span><strong id="enMentionRate">0%</strong></div><div class="name-meter english"><i id="enMentionBar" style="width:0%"></i></div><small id="enMentionMeta">Example Naturals · 0/30 条回答</small></div>
           </div>
-          <div class="diagnostic-line"><span>诊断</span><strong>国内样本已有中文名称认知，本轮未出现英文名称；二者不会互相覆盖。</strong></div>
+          <div class="diagnostic-line"><span>诊断</span><strong id="nameDiagnostic">国内样本已有中文名称认知，本轮未出现英文名称；二者不会互相覆盖。</strong></div>
         </section>
 
         <section class="chart-grid">
@@ -106,14 +113,14 @@
             <div class="line-chart" id="trendChart" aria-label="品牌趋势图"></div>
           </article>
           <article class="card compare-card">
-            <div class="card-head"><div><h2>模型对比</h2><p>六模型同题、同批次</p></div><button class="select compact">提及率 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></div>
+            <div class="card-head"><div><h2>模型对比</h2><p id="modelCompareMeta">六模型同题、同批次</p></div><button class="select compact">提及率 <b><svg class="ui-icon"><use href="#icon-chevron-down"/></svg></b></button></div>
             <div class="model-bars" id="modelBars"></div>
           </article>
         </section>
 
         <section class="bottom-grid">
           <article class="card table-card groups"><div class="card-head"><div><h2>问题表现</h2><p>按监控问题汇总</p></div><button class="ghost">查看全部</button></div>
-            <div class="table-wrap"><table><thead><tr><th>问题</th><th>提及模型</th><th>结果</th></tr></thead><tbody>
+            <div class="table-wrap"><table><thead><tr><th>问题</th><th>提及模型</th><th>结果</th></tr></thead><tbody id="questionPerformanceRows">
               <tr><td>这一品类有哪些值得了解的供应商？</td><td>0 / 6</td><td><span class="pill neutral">未提及</span></td></tr>
               <tr><td>哪些供应商可以提供产品和应用方案？</td><td>6 / 6</td><td><span class="pill good">全模型提及</span></td></tr>
               <tr><td>企业采购时应该比较哪些供应商？</td><td>0 / 6</td><td><span class="pill neutral">未提及</span></td></tr>
@@ -128,7 +135,7 @@
             <div class="evidence-state"><span>!</span><strong>暂不生成总排行榜</strong><p>不同模型的引用映射能力可能不同；引用分为 0 不等于搜索证据为空，需回到回答记录核验。</p><button class="ghost">查看证据边界</button></div>
           </article>
         </section>
-        <footer><span>问题集：example-zh-cn-v1 · 5基准 / 0发现</span><span>数据口径：30 条虚构演示回答</span><span>评分口径：透明复现分 v1</span><span>未知与不可用不填 0</span></footer>
+        <footer><span id="footerQuestionSet">问题集：example-zh-cn-v1 · 5基准 / 0发现</span><span id="footerDataScope">数据口径：30 条虚构演示回答</span><span>评分口径：透明复现分 v1</span><span>未知与不可用不填 0</span></footer>
       </section>
 
       <section class="content page-panel hidden" id="insightsPage">
@@ -169,7 +176,7 @@
       <section class="content page-panel hidden" id="answersPage">
         <div class="page-head">
           <div><h1>大模型回答记录</h1><p>每个指标都可以回到模型原始回答、排名依据和引用来源</p></div>
-          <div class="updated">问题集 <strong>example-zh-cn-v1</strong></div>
+          <div class="updated">问题集 <strong id="answerQuestionSet">example-zh-cn-v1</strong></div>
         </div>
         <section class="answer-stats" id="answerStats"></section>
         <section class="card answer-toolbar" aria-label="回答记录筛选">
@@ -211,7 +218,7 @@
           </article>
           <article class="card preview-card">
             <div class="card-head"><div><h2>识别预览</h2><p>客户填写的名称都会单独查看</p></div></div>
-            <div class="preview-answer">“在候选供应商中，<mark>示例品牌</mark>提供相关产品。英文资料也可能使用 <mark>Example Naturals</mark>。”</div>
+            <div class="preview-answer" id="previewAnswer">“在候选供应商中，示例品牌提供相关产品。英文资料也可能使用 Example Naturals。”</div>
             <div class="match-row"><span>本条是否计入提及</span><strong class="yes">是</strong></div>
             <div class="match-row"><span>命中名称</span><strong id="matchPreview">示例品牌 · Example Naturals</strong></div>
             <div class="match-row"><span>身份佐证</span><strong id="identityPreview">官网域名 · 完整公司名 · 业务上下文</strong></div>

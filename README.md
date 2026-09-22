@@ -2,6 +2,12 @@
 
 [English](#english) · [中文](#中文)
 
+[![CI](https://github.com/briton2008/geo-visibility-monitor/actions/workflows/ci.yml/badge.svg)](https://github.com/briton2008/geo-visibility-monitor/actions/workflows/ci.yml)
+[![Live demo](https://img.shields.io/badge/demo-GitHub%20Pages-2dd4d3)](https://briton2008.github.io/geo-visibility-monitor/)
+[![Release](https://img.shields.io/github/v/release/briton2008/geo-visibility-monitor?display_name=tag)](https://github.com/briton2008/geo-visibility-monitor/releases)
+[![License](https://img.shields.io/github/license/briton2008/geo-visibility-monitor)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+
 <p align="center"><img src="assets/logo.png" width="88" height="88" alt="GEO Visibility Monitor project logo"></p>
 
 <p align="center"><a href="https://briton2008.github.io/geo-visibility-monitor/">在线演示 / Live demo</a></p>
@@ -45,7 +51,7 @@
 以恒利原当前示例配置为参考：**6 个模型 × 5 个问题 × 每周 1 次**，每批约产生 30 次模型调用和 30 次联网搜索调用，按月均 4.33 周计算为约 130 次模型调用与 130 次搜索调用。
 
 - Token 估算：每次约 3,500 输入 Token；根据首轮保存的回答长度，平均可见输出约 900–1,700 Token。
-- 模型费用：默认选用 Flash/Lite/Turbo，并关闭可选的深度思考；约 **¥1.70/月**。Kimi 使用支持非思考模式的 Kimi-K2.5，不使用仅思考的 Kimi-K3。
+- 模型费用：默认选用 Flash/Lite/Turbo，并关闭可选的深度思考；约 **¥1.70/月**。Kimi 使用支持非思考模式的 Kimi-K2.6，不使用仅思考的 Kimi-K3。
 - 腾讯云 WSA 搜索费用：轻量版约 **¥2.34/月**，标准版约 **¥5.98/月**。
 - 综合参考：轻量版搜索约 **¥4/月**，标准版搜索约 **¥8/月**；考虑缓存、失败重试和价格变动，建议按 **¥5–10/月**准备预算。
 
@@ -158,6 +164,8 @@ python3 scripts/release_check.py
 
 真实运行数据、`config.json`、本地状态和生成的 `web/answer-data.js` 已加入 `.gitignore`。公开仓库只提交 `config.example.json` 和虚构的 `web/answer-data.example.js`。
 
+版本更新记录见 [CHANGELOG.md](CHANGELOG.md)。
+
 ## English
 
 GEO Visibility Monitor is a self-hosted, evidence-bounded monitor for brand visibility in AI-generated answers. It runs a versioned question set across multiple OpenAI-compatible models and keeps brand mentions, explicit ranks, alias language, citations, failures and trends separately auditable.
@@ -175,7 +183,7 @@ Scan the QR code in the [Chinese section](#加入交流) to join the WeChat comm
 The current Hengliyuan example runs **6 models × 5 questions × once per week**: about 30 model calls and 30 web-search calls per batch, or roughly 130 of each in an average month.
 
 - Token assumption: about 3,500 input tokens per call; the first saved answers contain roughly 900–1,700 visible output tokens on average.
-- Model estimate: approximately **CNY 1.70/month** with Flash/Lite/Turbo models and optional reasoning disabled. The example uses non-reasoning Kimi-K2.5 rather than reasoning-only Kimi-K3.
+- Model estimate: approximately **CNY 1.70/month** with Flash/Lite/Turbo models and optional reasoning disabled. The example uses non-reasoning Kimi-K2.6 rather than reasoning-only Kimi-K3.
 - Tencent Cloud WSA search: approximately **CNY 2.34/month** on Lite or **CNY 5.98/month** on Standard.
 - Combined reference: approximately **CNY 4/month** with Lite search or **CNY 8/month** with Standard search; keep a practical budget range of **CNY 5–10/month** for cache behavior, retries and price changes.
 
@@ -250,6 +258,8 @@ See [PROVIDERS.md](PROVIDERS.md) for provider-specific setup, endpoint examples 
 The transparent score is public and configurable: `rank component × 0.7 + citation component × 0.2 + official-source component × 0.1`. It does not reproduce any third-party proprietary score.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development and [SECURITY.md](SECURITY.md) for vulnerability reporting and safe local deployment.
+
+See [CHANGELOG.md](CHANGELOG.md) for version history.
 
 ## License
 

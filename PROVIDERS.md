@@ -18,7 +18,7 @@ GEO Visibility Monitor 当前原生使用 **OpenAI-compatible Chat Completions**
 监控任务通常只需要稳定的结构化回答，不需要长链路推理。建议默认使用 **Flash / Lite / Turbo** 模型，并显式关闭可选的深度思考：
 
 - 千问：`qwen3.8-flash`，请求体增加 `"enable_thinking": false`。
-- Kimi：使用支持非思考模式的 `kimi-k2.5`，不要使用仅思考的 `kimi-k3`。
+- Kimi：使用支持非思考模式的 `kimi-k2.6`，不要使用仅思考的 `kimi-k3`。请求体设置 `"enable_thinking": false`。
 - 豆包：选择控制台当前可用的 Lite / Mini / Turbo 版本，并增加 `"thinking": {"type": "disabled"}`。
 - 文心：使用 ERNIE Turbo 文本模型；不要额外启用搜索增强或思考功能。
 - DeepSeek / GLM：只有模型官方明确支持关闭思考时才传关闭参数；若模型是强制思考型，应在控制台换成快速非思考版本，不能仅修改展示名称。

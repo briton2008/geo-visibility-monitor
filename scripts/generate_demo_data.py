@@ -73,10 +73,22 @@ def main() -> None:
     scores = [record["metrics"]["visibility_score"] for record in records]
     payload = {
         "dataClassification": "synthetic_demo",
+        "project": "example-geo-monitor",
         "generatedAt": dt.datetime(2026, 1, 1, 9, 0, tzinfo=dt.timezone(dt.timedelta(hours=8))).isoformat(),
         "source": "deterministic synthetic demo fixture; not real observations",
+        "brand": {
+            "name": "示例天然食品有限公司",
+            "aliases": ["示例品牌", "Example Naturals"],
+            "businessDescription": "用于演示的虚构食品原料供应商",
+            "coreOfferings": ["示例产品", "应用方案"],
+            "primaryMarkets": ["中国", "海外"],
+            "officialWebsite": "https://example.com",
+            "headquarters": "示例城市",
+            "officialChannels": [],
+        },
         "questionSet": {"id": "example-zh-cn-v1", "fingerprint": "synthetic-demo"},
         "providerCount": 6,
+        "configuredProviders": PROVIDERS,
         "recordCount": len(records),
         "providers": PROVIDERS,
         "records": records,

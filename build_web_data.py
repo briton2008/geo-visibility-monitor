@@ -133,6 +133,7 @@ def history_rows(config: dict, reports: list) -> list:
 
 def build_rows(root: Path = ROOT) -> dict:
     config = geo.read_json(root / "config.json")
+    brand = config.get("brand", {})
     plan = config.get("monitoring", {})
     allowed_providers = set(plan.get("providers") or config.get("models", {}))
     reports = [item for item in all_reports(root) if item["provider"] in allowed_providers]
@@ -172,10 +173,26 @@ def build_rows(root: Path = ROOT) -> dict:
     trends, model_trends = build_trends(config, reports)
     active = geo.active_question_set(config)
     return {
+        "dataClassification": "local_real_collection",
+        "project": config.get("project", "local-geo-monitor"),
         "generatedAt": geo.dt.datetime.now().astimezone().isoformat(),
         "source": "local report.json files; latest complete report per provider for answer records and latest comparable report per provider/day for trends",
+        "brand": {
+            "name": brand.get("name", ""),
+            "aliases": brand.get("aliases", []),
+            "businessDescription": brand.get("business_description", ""),
+            "coreOfferings": brand.get("core_offerings", []),
+            "primaryMarkets": brand.get("primary_markets", []),
+            "officialWebsite": brand.get("official_website", ""),
+            "headquarters": brand.get("headquarters", ""),
+            "officialChannels": brand.get("official_channels", []),
+        },
         "questionSet": {"id": active["id"], "fingerprint": active["fingerprint"]},
         "providerCount": len(providers),
+        "configuredProviders": [
+            {"id": provider, "label": config.get("models", {}).get(provider, {}).get("label", provider)}
+            for provider in plan.get("providers", sorted(config.get("models", {})))
+        ],
         "recordCount": len(rows),
         "providers": providers,
         "records": rows,

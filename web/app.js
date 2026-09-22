@@ -1,18 +1,23 @@
-const modelData = [
-  { name: '示例模型 A', mention: 40, rank: 2, score: 20.0 },
-  { name: '示例模型 B', mention: 40, rank: 3, score: 19.4 },
-  { name: '示例模型 C', mention: 40, rank: 4, score: 18.8 },
-  { name: '示例模型 D', mention: 40, rank: 2, score: 18.2 },
-  { name: '示例模型 E', mention: 40, rank: 3, score: 17.6 },
-  { name: '示例模型 F', mention: 40, rank: 4, score: 17.0 }
-];
+const answerData = window.GEO_ANSWER_DATA || {providers: [], records: [], trend: [], modelTrend: {}};
+const latestTrend = (answerData.trend || []).at(-1) || {};
+const latestDate = latestTrend.date || 'unavailable';
+
+const modelData = (answerData.providers || []).map(provider => {
+  const point = (answerData.modelTrend?.[provider.id] || []).at(-1) || {};
+  return {
+    name: provider.label,
+    mention: point.mentionRate,
+    rank: point.averageRank,
+    score: point.averageScore
+  };
+});
 
 const metrics = {
-  mention: { label: '整体品牌提及率', value: 40, max: 100, suffix: '%' },
-  mentionZh: { label: '中文名称提及率', value: 40, max: 100, suffix: '%' },
-  mentionEn: { label: '英文名称提及率', value: 0, max: 100, suffix: '%' },
-  rank: { label: '平均排名', value: 3.0, max: 6, suffix: '' },
-  score: { label: '透明复现分', value: 18.5, max: 100, suffix: '' }
+  mention: { label: '整体品牌提及率', value: latestTrend.mentionRate, max: 100, suffix: '%' },
+  mentionZh: { label: '中文名称提及率', value: latestTrend.chineseMentionRate, max: 100, suffix: '%' },
+  mentionEn: { label: '英文名称提及率', value: latestTrend.englishMentionRate, max: 100, suffix: '%' },
+  rank: { label: '平均排名', value: latestTrend.averageRank, max: 6, suffix: '' },
+  score: { label: '透明复现分', value: latestTrend.averageScore, max: 100, suffix: '' }
 };
 
 const providerCatalog = [
@@ -95,7 +100,7 @@ const providerCatalog = [
   }
 ];
 
-const defaultBrandConfig = {
+const demoBrandConfig = {
   name: '示例天然食品有限公司',
   aliases: ['示例品牌', 'Example Naturals'],
   businessDescription: '用于演示的虚构食品原料供应商',
@@ -105,7 +110,9 @@ const defaultBrandConfig = {
   headquarters: '示例城市',
   officialChannels: []
 };
-const storedBrandConfig = JSON.parse(localStorage.getItem('geoBrandConfig') || 'null');
+const defaultBrandConfig = {...demoBrandConfig, ...(answerData.brand || {})};
+const brandStorageKey = `geoBrandConfig:${answerData.project || answerData.questionSet?.id || 'default'}`;
+const storedBrandConfig = JSON.parse(localStorage.getItem(brandStorageKey) || 'null');
 let brandConfig = {...structuredClone(defaultBrandConfig), ...(storedBrandConfig || {})};
 
 function renderAliases() {
@@ -122,7 +129,8 @@ function renderAliases() {
     brandConfig.aliases.splice(Number(button.dataset.aliasIndex), 1);
     renderAliases();
   }));
-  const previewText = '在候选供应商中，示例品牌提供相关产品。英文资料也可能使用 Example Naturals。';
+  const previewText = `在候选供应商中，${brandConfig.aliases[0] || brandConfig.name}提供相关产品。英文资料也可能使用 ${brandConfig.aliases.find(alias => /[a-z]/i.test(alias)) || brandConfig.name}。`;
+  document.querySelector('#previewAnswer').textContent = `“${previewText}”`;
   const previewMatches = brandConfig.aliases.filter(alias => previewText.toLocaleLowerCase().includes(alias.toLocaleLowerCase()));
   document.querySelector('#matchPreview').textContent = previewMatches.join(' · ') || '当前示例未命中';
 }
@@ -135,7 +143,6 @@ function showPage(page) {
   document.querySelector('#pageTitle').textContent = titles[page] || '品牌概览';
 }
 
-const answerData = window.GEO_ANSWER_DATA || {providers: [], records: []};
 let selectedAnswerId = answerData.records[0]?.id || null;
 let monitorMetric = 'mentionRate';
 let liveMonitoringPlan = structuredClone(answerData.monitoringPlan || {});
@@ -384,7 +391,8 @@ function fillMonitoringSettings(plan) {
   document.querySelector('#monitorTime').value = liveMonitoringPlan.time || '09:00';
   document.querySelector('#monitorWeekday').value = String(liveMonitoringPlan.weekday ?? 0);
   const selected = new Set(liveMonitoringPlan.providers || []);
-  document.querySelector('#monitorProviderOptions').innerHTML = answerData.providers.map(provider => `
+  const configuredProviders = answerData.configuredProviders || answerData.providers;
+  document.querySelector('#monitorProviderOptions').innerHTML = configuredProviders.map(provider => `
     <label class="model-option"><input type="checkbox" data-monitor-provider value="${escapeHtml(provider.id)}" ${selected.has(provider.id) ? 'checked' : ''} /><span>${escapeHtml(provider.label)}</span></label>`).join('');
   document.querySelectorAll('[data-monitor-provider]').forEach(input => input.addEventListener('change', renderCadenceSettings));
   renderCadenceSettings();
@@ -503,30 +511,107 @@ function renderMonitoring() {
   renderBatchHistory();
 }
 
+function pct(value) {
+  return value == null ? 'unavailable' : `${Number(value).toFixed(Number.isInteger(Number(value)) ? 0 : 1)}%`;
+}
+
+function isEnglishName(value) {
+  return /[a-z]/i.test(value || '') && !/[\u3400-\u9fff]/.test(value || '');
+}
+
+function renderOverview() {
+  const records = answerData.records || [];
+  const available = records.filter(record => record.status === 'ok');
+  const ranked = available.filter(record => record.metrics?.brand_rank != null);
+  const mentionedZh = available.filter(record => record.metrics?.chinese_name_mentioned).length;
+  const mentionedEn = available.filter(record => record.metrics?.english_name_mentioned).length;
+  const questionCount = new Set(records.map(record => record.prompt)).size;
+  const providerCount = answerData.providerCount ?? answerData.providers.length;
+  const classification = answerData.dataClassification || 'unavailable';
+  const isDemo = classification === 'synthetic_demo';
+  const updatedAt = (answerData.generatedAt || 'unavailable').replace('T', ' ').slice(0, 16);
+  const aliases = brandConfig.aliases || [];
+  const chineseNames = [brandConfig.name, ...aliases].filter(name => name && !isEnglishName(name));
+  const englishNames = aliases.filter(isEnglishName);
+
+  document.querySelector('#brandCrumb').textContent = `${aliases[0] || brandConfig.name} GEO`;
+  document.querySelector('#sidebarQuestionCount').textContent = questionCount;
+  document.querySelector('#sidebarAnswerCount').textContent = records.length;
+  document.querySelector('#sidebarProviderCount').textContent = `${providerCount} 个模型已接入`;
+  document.querySelector('#sidebarLatestDate').textContent = `最近采集 ${latestDate}`;
+  document.querySelector('#overviewUpdatedAt').textContent = updatedAt;
+  document.querySelector('#overviewDateFilter').textContent = latestDate;
+  document.querySelector('#overviewModelFilter').textContent = `全部 ${providerCount} 个模型`;
+  document.querySelector('#answerQuestionSet').textContent = answerData.questionSet?.id || 'unavailable';
+
+  document.querySelector('#dataNoticeTitle').textContent = isDemo ? '演示数据' : '本机真实采集';
+  document.querySelector('#dataNoticeText').textContent = isDemo
+    ? '当前页面使用完全虚构的示例品牌、模型和引用，不代表任何真实监测结果。'
+    : `当前展示 ${latestDate} 的本机 API 采集结果；仅代表固定问题集与当次模型回答，不等同于消费者端产品实时结果。`;
+
+  document.querySelector('#kpiMention').textContent = pct(latestTrend.mentionRate);
+  document.querySelector('#kpiMentionMeta').innerHTML = `有效样本 ${latestTrend.availableCount ?? 'unavailable'}/${latestTrend.answerCount ?? 'unavailable'} <span>单日基线</span>`;
+  document.querySelector('#kpiRank').textContent = formatMetric(latestTrend.averageRank);
+  document.querySelector('#kpiRankMeta').innerHTML = `有排名样本 ${ranked.length}/${latestTrend.availableCount ?? 'unavailable'} <span>单日基线</span>`;
+  document.querySelector('#kpiScore').textContent = formatMetric(latestTrend.averageScore);
+  document.querySelector('#kpiScoreMeta').innerHTML = `公式 v1 · ${latestTrend.availableCount ?? 'unavailable'}/${latestTrend.answerCount ?? 'unavailable'} <span>单日基线</span>`;
+
+  document.querySelector('#overallMention').textContent = `整体 ${pct(latestTrend.mentionRate)}`;
+  document.querySelector('#zhMentionRate').textContent = pct(latestTrend.chineseMentionRate);
+  document.querySelector('#zhMentionBar').style.width = `${latestTrend.chineseMentionRate ?? 0}%`;
+  document.querySelector('#zhMentionMeta').textContent = `${chineseNames.join(' / ') || 'unavailable'} · ${mentionedZh}/${available.length} 条回答`;
+  document.querySelector('#enMentionRate').textContent = pct(latestTrend.englishMentionRate);
+  document.querySelector('#enMentionBar').style.width = `${latestTrend.englishMentionRate ?? 0}%`;
+  document.querySelector('#enMentionMeta').textContent = `${englishNames.join(' / ') || 'unavailable'} · ${mentionedEn}/${available.length} 条回答`;
+  document.querySelector('#nameDiagnostic').textContent = latestTrend.englishMentionRate > 0
+    ? '中英文品牌名均已出现；两种名称分别计算，不互相覆盖。'
+    : '本轮已分别检查中英文名称；英文名未出现，不会被中文名提及覆盖。';
+  document.querySelector('#modelCompareMeta').textContent = `${providerCount} 模型同题、同批次`;
+
+  const grouped = new Map();
+  records.forEach(record => {
+    if (!grouped.has(record.prompt)) grouped.set(record.prompt, []);
+    grouped.get(record.prompt).push(record);
+  });
+  document.querySelector('#questionPerformanceRows').innerHTML = [...grouped.entries()].map(([prompt, rows]) => {
+    const total = rows.length;
+    const mentioned = rows.filter(row => row.metrics?.brand_mentioned).length;
+    const label = mentioned === total && total ? '全模型提及' : (mentioned ? `部分提及 ${mentioned}/${total}` : '未提及');
+    const tone = mentioned ? 'good' : 'neutral';
+    return `<tr><td>${escapeHtml(prompt)}</td><td>${mentioned} / ${total}</td><td><span class="pill ${tone}">${label}</span></td></tr>`;
+  }).join('');
+  document.querySelector('#footerQuestionSet').textContent = `问题集：${answerData.questionSet?.id || 'unavailable'} · ${questionCount}基准 / 0发现`;
+  document.querySelector('#footerDataScope').textContent = `数据口径：${records.length} 条${isDemo ? '虚构演示' : '本机真实'}回答`;
+}
+
 function renderTrend(metricKey) {
   const metric = metrics[metricKey];
+  if (metric.value == null) {
+    document.querySelector('#trendChart').innerHTML = '<div class="trend-empty">unavailable</div>';
+    return;
+  }
   const plotTop = 28, plotBottom = 205, plotLeft = 58, plotRight = 670;
   const y = plotBottom - (metric.value / metric.max) * (plotBottom - plotTop);
   const ticks = [0, .25, .5, .75, 1];
   document.querySelector('#trendChart').innerHTML = `
-    <svg viewBox="0 0 720 246" role="img" aria-label="2026-01-01 ${metric.label} ${metric.value}${metric.suffix}">
+    <svg viewBox="0 0 720 246" role="img" aria-label="${latestDate} ${metric.label} ${metric.value}${metric.suffix}">
       ${ticks.map(t => { const ty=plotBottom-t*(plotBottom-plotTop); return `<line x1="${plotLeft}" y1="${ty}" x2="${plotRight}" y2="${ty}" stroke="#213546"/><text x="48" y="${ty+4}" fill="#71879a" text-anchor="end" font-size="11">${metricKey==='rank'?(metric.max*(1-t)).toFixed(1):Math.round(metric.max*t)+metric.suffix}</text>`}).join('')}
       <line x1="${plotLeft}" y1="${plotBottom}" x2="${plotRight}" y2="${plotBottom}" stroke="#486071"/>
       <line x1="364" y1="${y}" x2="364" y2="${plotBottom}" stroke="#2dd4d3" stroke-dasharray="3 4"/>
       <circle cx="364" cy="${y}" r="7" fill="#2dd4d3" stroke="#baffff" stroke-width="2"/>
       <text x="364" y="${Math.max(18,y-13)}" fill="#ecffff" text-anchor="middle" font-size="14" font-weight="700">${metric.value}${metric.suffix}</text>
-      <text x="364" y="231" fill="#8fa2b4" text-anchor="middle" font-size="12">2026-01-01</text>
+      <text x="364" y="231" fill="#8fa2b4" text-anchor="middle" font-size="12">${latestDate}</text>
     </svg>`;
 }
 
 function renderBars() {
   document.querySelector('#modelBars').innerHTML = modelData.map(model => `
-    <div class="bar-row"><span class="bar-label" title="${model.name}">${model.name}</span><div class="bar-track"><div class="bar-fill" style="width:${model.mention}%"></div></div><strong class="bar-value">${model.mention}%</strong></div>`).join('');
+    <div class="bar-row"><span class="bar-label" title="${escapeHtml(model.name)}">${escapeHtml(model.name)}</span><div class="bar-track"><div class="bar-fill" style="width:${model.mention ?? 0}%"></div></div><strong class="bar-value">${pct(model.mention)}</strong></div>`).join('');
 }
 
 function renderScores() {
   document.querySelector('#scoreList').innerHTML = modelData.map(model => `
-    <div class="score-item"><div class="score-top"><span>${model.name}</span><strong>${model.score}</strong></div><div class="score-meter"><span style="width:${model.score}%"></span></div></div>`).join('');
+    <div class="score-item"><div class="score-top"><span>${escapeHtml(model.name)}</span><strong>${formatMetric(model.score)}</strong></div><div class="score-meter"><span style="width:${model.score ?? 0}%"></span></div></div>`).join('');
 }
 
 document.querySelectorAll('.segmented button').forEach(button => button.addEventListener('click', () => {
@@ -562,12 +647,12 @@ document.querySelector('#saveBrand').addEventListener('click', () => {
   brandConfig.officialWebsite = officialWebsite;
   brandConfig.headquarters = document.querySelector('#headquarters').value.trim();
   brandConfig.officialChannels = document.querySelector('#officialChannels').value.split(/[,，]/).map(item => item.trim()).filter(Boolean);
-  localStorage.setItem('geoBrandConfig', JSON.stringify(brandConfig));
+  localStorage.setItem(brandStorageKey, JSON.stringify(brandConfig));
   document.querySelector('#saveState').textContent = `已保存 · ${new Date().toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'})}`;
 });
 document.querySelector('#resetBrand').addEventListener('click', () => {
   brandConfig = structuredClone(defaultBrandConfig);
-  localStorage.removeItem('geoBrandConfig');
+  localStorage.removeItem(brandStorageKey);
   renderAliases();
   document.querySelector('#saveState').textContent = '已恢复当前品牌配置';
 });
@@ -590,6 +675,7 @@ document.querySelector('#monitorWeekday').addEventListener('change', renderCaden
 document.querySelector('#saveMonitoring').addEventListener('click', saveMonitoringSettings);
 document.querySelectorAll('.budget-inputs input').forEach(input => input.addEventListener('input', renderBudgetEstimate));
 
+renderOverview();
 renderTrend('mention');
 renderBars();
 renderScores();

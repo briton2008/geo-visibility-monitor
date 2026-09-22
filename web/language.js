@@ -270,6 +270,9 @@
     ,'，页面地址保持不变。': 'without changing the page URL.'
     ,'当前二维码由微信生成，预计在 2026-09-28 前有效；若已失效，请等待仓库更新。': 'This WeChat QR code is expected to remain valid through 2026-09-28. If it has expired, please wait for the repository update.'
     ,'打开微信群二维码大图': 'Open the full-size WeChat group QR code'
+    ,'本机真实采集': 'Local verified collection'
+    ,'本轮已分别检查中英文名称；英文名未出现，不会被中文名提及覆盖。': 'Chinese and English names were checked separately. No English-name mention appeared, and Chinese mentions do not overwrite that result.'
+    ,'中英文品牌名均已出现；两种名称分别计算，不互相覆盖。': 'Both Chinese and English brand names appeared. The two rates are measured independently.'
   }));
 
   const placeholders = new Map([
@@ -296,7 +299,18 @@
     return value
       .replace(/(\d+) 条真实回答/g, '$1 verified answers')
       .replace(/(\d+) 条演示回答/g, '$1 demo answers')
+      .replace(/(\d+) 条本机真实回答/g, '$1 local verified answers')
       .replace(/(\d+)\/(\d+) 条回答/g, '$1/$2 answers')
+      .replace(/(\d+) 个模型已接入/g, '$1 models connected')
+      .replace(/最近采集\s+([\d-]+|unavailable)/g, 'Last collection: $1')
+      .replace(/全部\s+(\d+)\s+个模型/g, 'All $1 models')
+      .replace(/(\d+) 模型同题、同批次/g, 'Same questions and batch across $1 models')
+      .replace(/有效样本\s+([^ ]+)\s+单日基线/g, 'Available samples $1 Single-day baseline')
+      .replace(/有排名样本\s+([^ ]+)\s+单日基线/g, 'Ranked samples $1 Single-day baseline')
+      .replace(/公式 v1 ·\s+([^ ]+)\s+单日基线/g, 'Formula v1 · $1 Single-day baseline')
+      .replace(/问题集：([^ ]+) · (\d+)基准 \/ 0发现/g, 'Question set: $1 · $2 benchmark / 0 discovery')
+      .replace(/数据口径：(\d+) 条本机真实回答/g, 'Data: $1 local verified answers')
+      .replace(/当前展示 ([\d-]+) 的本机 API 采集结果；仅代表固定问题集与当次模型回答，不等同于消费者端产品实时结果。/g, 'Showing local API results collected on $1. They represent this fixed question set and batch, not live consumer-product results.')
       .replace(/(\d+) 类/g, '$1 types')
       .replace(/(\d+) 个本地批次/g, '$1 local batches')
       .replace(/(\d+) 个真实采集日/g, '$1 verified collection days')
