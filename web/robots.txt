@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://briton2008.github.io/geo-visibility-monitor/sitemap.xml
+Sitemap: https://briton2008.github.io/geo-visibility-lab/sitemap.xml

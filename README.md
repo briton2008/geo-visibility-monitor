@@ -1,18 +1,28 @@
-# GEO Visibility Monitor
+# GEO Visibility Lab
 
 [English](#english) · [中文](#中文)
 
-[![CI](https://github.com/briton2008/geo-visibility-monitor/actions/workflows/ci.yml/badge.svg)](https://github.com/briton2008/geo-visibility-monitor/actions/workflows/ci.yml)
-[![Live demo](https://img.shields.io/badge/demo-GitHub%20Pages-2dd4d3)](https://briton2008.github.io/geo-visibility-monitor/)
-[![Release](https://img.shields.io/github/v/release/briton2008/geo-visibility-monitor?display_name=tag)](https://github.com/briton2008/geo-visibility-monitor/releases)
-[![License](https://img.shields.io/github/license/briton2008/geo-visibility-monitor)](LICENSE)
+> 原 **GEO Visibility Monitor**，自 v0.1.1 起更名为 **GEO Visibility Lab**。旧 GitHub 仓库地址会自动跳转到新地址；插件标识已改为 `geo-visibility-lab`。
+
+[![CI](https://github.com/briton2008/geo-visibility-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/briton2008/geo-visibility-lab/actions/workflows/ci.yml)
+[![Live demo](https://img.shields.io/badge/demo-GitHub%20Pages-2dd4d3)](https://briton2008.github.io/geo-visibility-lab/)
+[![Release](https://img.shields.io/github/v/release/briton2008/geo-visibility-lab?display_name=tag)](https://github.com/briton2008/geo-visibility-lab/releases)
+[![License](https://img.shields.io/github/license/briton2008/geo-visibility-lab)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 
-<p align="center"><img src="assets/logo.png" width="88" height="88" alt="GEO Visibility Monitor project logo"></p>
+[![Stars](https://img.shields.io/github/stars/briton2008/geo-visibility-lab?style=flat&label=stars)](https://github.com/briton2008/geo-visibility-lab/stargazers)
+![Skill](https://img.shields.io/badge/Skill-Agent-555?labelColor=444)
+![GEO](https://img.shields.io/badge/GEO-Monitoring-2dd4d3?labelColor=555)
+![AI Brand](https://img.shields.io/badge/AI%20Brand-Visibility-ff7a45?labelColor=555)
+![Codex](https://img.shields.io/badge/Codex-Supported-5b5bd6?labelColor=555)
+![Claude Code](https://img.shields.io/badge/Claude%20Code-Supported-7c5aa6?labelColor=555)
+![Gemini CLI](https://img.shields.io/badge/Gemini%20CLI-Supported-4285F4?labelColor=555)
 
-<p align="center"><a href="https://briton2008.github.io/geo-visibility-monitor/">在线演示 / Live demo</a></p>
+<p align="center"><img src="assets/logo.png" width="88" height="88" alt="GEO Visibility Lab project logo"></p>
 
-![GEO Visibility Monitor 项目效果图：大模型品牌可见度监测](assets/geo-visibility-monitor-cover.png)
+<p align="center"><a href="https://briton2008.github.io/geo-visibility-lab/">在线演示 / Live demo</a></p>
+
+![GEO Visibility Lab 项目效果图：大模型品牌可见度监测](assets/geo-visibility-lab-cover.png)
 
 ## 中文
 
@@ -30,15 +40,15 @@
 
 **品牌概览 / Brand overview**
 
-![GEO Visibility Monitor 品牌概览桌面界面](assets/screenshots/dashboard-overview-zh.jpg)
+![GEO Visibility Lab 品牌概览桌面界面](assets/screenshots/dashboard-overview-zh.jpg)
 
 **趋势监控 / Trend monitoring**
 
-![GEO Visibility Monitor 趋势监控桌面界面](assets/screenshots/dashboard-trends-zh.jpg)
+![GEO Visibility Lab 趋势监控桌面界面](assets/screenshots/dashboard-trends-zh.jpg)
 
 **回答记录 / Answer records**
 
-![GEO Visibility Monitor 英文回答记录桌面界面](assets/screenshots/dashboard-answers-en.jpg)
+![GEO Visibility Lab 英文回答记录桌面界面](assets/screenshots/dashboard-answers-en.jpg)
 
 ### 加入交流
 
@@ -62,8 +72,8 @@
 ### 本地监控软件
 
 ```bash
-git clone https://github.com/briton2008/geo-visibility-monitor.git
-cd geo-visibility-monitor
+git clone https://github.com/briton2008/geo-visibility-lab.git
+cd geo-visibility-lab
 python3 scripts/bootstrap.py
 python3 scripts/generate_demo_data.py
 python3 dashboard_server.py --host 127.0.0.1 --port 4187
@@ -74,26 +84,26 @@ python3 dashboard_server.py --host 127.0.0.1 --port 4187
 分两次发送：
 
 ```text
-/plugin marketplace add briton2008/geo-visibility-monitor
+/plugin marketplace add briton2008/geo-visibility-lab
 ```
 
 ```text
-/plugin install geo-visibility-monitor@geo-visibility-monitor
+/plugin install geo-visibility-lab@geo-visibility-lab
 ```
 
 ### Codex
 
 ```bash
-codex plugin marketplace add briton2008/geo-visibility-monitor
-codex plugin add geo-visibility-monitor@geo-visibility-monitor
+codex plugin marketplace add briton2008/geo-visibility-lab
+codex plugin add geo-visibility-lab@geo-visibility-lab
 ```
 
-安装后重新启动 Codex，调用 `$geo-visibility-monitor`，或直接提出“检查我的 GEO 监控配置”。
+安装后重新启动 Codex，调用 `$geo-visibility-lab`，或直接提出“检查我的 GEO 监控配置”。
 
 ### Gemini CLI
 
 ```bash
-gemini extensions install https://github.com/briton2008/geo-visibility-monitor
+gemini extensions install https://github.com/briton2008/geo-visibility-lab
 ```
 
 ### 其他 Agent
@@ -168,7 +178,9 @@ python3 scripts/release_check.py
 
 ## English
 
-GEO Visibility Monitor is a self-hosted, evidence-bounded monitor for brand visibility in AI-generated answers. It runs a versioned question set across multiple OpenAI-compatible models and keeps brand mentions, explicit ranks, alias language, citations, failures and trends separately auditable.
+> Formerly **GEO Visibility Monitor**. Starting with v0.1.1, the project and plugin are named **GEO Visibility Lab**. GitHub redirects the former repository URL; use `geo-visibility-lab` for new installations.
+
+GEO Visibility Lab is a self-hosted, evidence-bounded monitor for brand visibility in AI-generated answers. It runs a versioned question set across multiple OpenAI-compatible models and keeps brand mentions, explicit ranks, alias language, citations, failures and trends separately auditable.
 
 The project was developed through website GEO work by **[Guilin Hengliyuan Biotech Co., Ltd.](https://heng-li-yuan.com/)**（**桂林恒利原生物科技有限公司**）and open-sourced as a reusable brand-monitoring tool. Apache-2.0 covers the code; project identity and company trademarks are not automatically licensed with the code. See [TRADEMARKS.md](TRADEMARKS.md).
 
@@ -194,8 +206,8 @@ This is a **dated estimate as of 2026-09-21, not an invoice or price guarantee**
 ### Local monitor
 
 ```bash
-git clone https://github.com/briton2008/geo-visibility-monitor.git
-cd geo-visibility-monitor
+git clone https://github.com/briton2008/geo-visibility-lab.git
+cd geo-visibility-lab
 python3 scripts/bootstrap.py
 python3 scripts/generate_demo_data.py
 python3 dashboard_server.py --host 127.0.0.1 --port 4187
@@ -206,24 +218,24 @@ python3 dashboard_server.py --host 127.0.0.1 --port 4187
 Send these as two separate commands:
 
 ```text
-/plugin marketplace add briton2008/geo-visibility-monitor
+/plugin marketplace add briton2008/geo-visibility-lab
 ```
 
 ```text
-/plugin install geo-visibility-monitor@geo-visibility-monitor
+/plugin install geo-visibility-lab@geo-visibility-lab
 ```
 
 ### Codex
 
 ```bash
-codex plugin marketplace add briton2008/geo-visibility-monitor
-codex plugin add geo-visibility-monitor@geo-visibility-monitor
+codex plugin marketplace add briton2008/geo-visibility-lab
+codex plugin add geo-visibility-lab@geo-visibility-lab
 ```
 
 ### Gemini CLI
 
 ```bash
-gemini extensions install https://github.com/briton2008/geo-visibility-monitor
+gemini extensions install https://github.com/briton2008/geo-visibility-lab
 ```
 
 These remote install commands point to the public repository. Agents that read `AGENTS.md` can also use the checked-out repository directly.
@@ -257,7 +269,7 @@ See [PROVIDERS.md](PROVIDERS.md) for provider-specific setup, endpoint examples 
 
 The transparent score is public and configurable: `rank component × 0.7 + citation component × 0.2 + official-source component × 0.1`. It does not reproduce any third-party proprietary score.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development and [SECURITY.md](SECURITY.md) for vulnerability reporting and safe local deployment.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development and [.github/SECURITY.md](.github/SECURITY.md) for vulnerability reporting and safe local deployment.
 
 See [CHANGELOG.md](CHANGELOG.md) for version history.
 

@@ -13,14 +13,18 @@ REQUIRED = [
     "README.md",
     "CHANGELOG.md",
     "LICENSE",
-    "SECURITY.md",
+    ".github/SECURITY.md",
     "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md",
     "PROVIDERS.md",
     "TRADEMARKS.md",
     "assets/logo.png",
     "config.example.json",
     "web/answer-data.example.js",
     ".github/workflows/ci.yml",
+    ".github/ISSUE_TEMPLATE/bug_report.yml",
+    ".github/ISSUE_TEMPLATE/feature_request.yml",
+    ".github/pull_request_template.md",
 ]
 BLOCKED_FINGERPRINTS = [
     (3, "2c3eff6a015cc7f14edee8056d7e9e7265b5fec3c9f801b12dbb0a62c0ce9397", "private brand name"),
@@ -43,6 +47,7 @@ PUBLIC_REPOSITORY_METADATA = {
     Path("README.md"),
     Path("CHANGELOG.md"),
     Path(".agents/plugins/marketplace.json"),
+    Path(".github/ISSUE_TEMPLATE/config.yml"),
     Path("web/index.html"),
 }
 

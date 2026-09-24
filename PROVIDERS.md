@@ -2,7 +2,7 @@
 
 > 最后核对：2026-09-21。供应商会调整模型名称、价格和接口范围；配置前请再次查看对应官方文档。
 
-GEO Visibility Monitor 当前原生使用 **OpenAI-compatible Chat Completions** 请求格式。无需安装各厂商 SDK，只需要四项配置：完整 `endpoint`、模型 `name`、密钥环境变量 `env_key` 和展示名称 `label`。
+GEO Visibility Lab 当前原生使用 **OpenAI-compatible Chat Completions** 请求格式。无需安装各厂商 SDK，只需要四项配置：完整 `endpoint`、模型 `name`、密钥环境变量 `env_key` 和展示名称 `label`。
 
 ## 推荐接入路线
 
@@ -46,7 +46,7 @@ GEO Visibility Monitor 当前原生使用 **OpenAI-compatible Chat Completions**
 ## 通用安装流程
 
 ```bash
-cd geo-visibility-monitor
+cd geo-visibility-lab
 python3 scripts/bootstrap.py
 ```
 

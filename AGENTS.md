@@ -1,6 +1,6 @@
-# GEO Visibility Monitor agent guidance
+# GEO Visibility Lab agent guidance
 
-Use the bundled `geo-visibility-monitor` skill when a task involves configuring, running, diagnosing or reporting this repository's GEO monitoring workflow.
+Use the bundled `geo-visibility-lab` skill when a task involves configuring, running, diagnosing or reporting this repository's GEO monitoring workflow.
 
 - Preserve raw answers, failure states, question-set versions and citation metadata.
 - Never convert unavailable, timed-out or rate-limited samples into zero.

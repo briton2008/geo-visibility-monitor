@@ -1,4 +1,4 @@
-# GEO Visibility Monitor brand spec
+# GEO Visibility Lab brand spec
 
 ## Assets
 

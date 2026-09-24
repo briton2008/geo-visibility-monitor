@@ -1,13 +1,13 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "geo-visibility-monitor",
+  "name": "geo-visibility-lab",
   "description": "Self-hosted GEO monitoring and evidence-bounded diagnosis for brands.",
   "owner": {
     "name": "Hengliyuan Open Source Contributors"
   },
   "plugins": [
     {
-      "name": "geo-visibility-monitor",
+      "name": "geo-visibility-lab",
       "description": "Configure, run and diagnose repeatable brand visibility monitoring across AI models.",
       "source": "./",
       "category": "productivity"

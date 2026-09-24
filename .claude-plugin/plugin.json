@@ -1,6 +1,6 @@
 {
-  "name": "geo-visibility-monitor",
-  "version": "0.1.0",
+  "name": "geo-visibility-lab",
+  "version": "0.1.1",
   "description": "Operate a self-hosted, evidence-bounded GEO visibility monitor for brands across AI models.",
   "author": {
     "name": "Hengliyuan Open Source Contributors"

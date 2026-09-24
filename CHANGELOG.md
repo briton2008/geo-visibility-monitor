@@ -1,6 +1,19 @@
 # Changelog
 
-All notable changes to GEO Visibility Monitor are documented here.
+All notable changes to GEO Visibility Lab are documented here.
+
+## [0.1.1] - 2026-09-24
+
+### Changed
+
+- Renamed the project from **GEO Visibility Monitor** to **GEO Visibility Lab** to distinguish it from similarly named repositories while preserving the established GEO visibility positioning.
+- Renamed the repository, plugin, skill, Python package and cover asset to `geo-visibility-lab`.
+- Updated the illustrated cover, social metadata, GitHub Pages URLs, installation commands and agent integration metadata for the new identity.
+
+### Added
+
+- GitHub issue forms, pull request template and Contributor Covenant code of conduct.
+- Migration notes for existing users of the former repository and plugin name.
 
 ## [0.1.0] - 2026-09-22
 
@@ -27,4 +40,5 @@ All notable changes to GEO Visibility Monitor are documented here.
 - Release checks inspect Git-tracked release files while keeping ignored private runtime data outside the public package.
 - Tests use the public example configuration and no longer depend on a user's private local `config.json`.
 
-[0.1.0]: https://github.com/briton2008/geo-visibility-monitor/releases/tag/v0.1.0
+[0.1.1]: https://github.com/briton2008/geo-visibility-lab/releases/tag/v0.1.1
+[0.1.0]: https://github.com/briton2008/geo-visibility-lab/releases/tag/v0.1.0

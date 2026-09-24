@@ -28,7 +28,7 @@ jobs:
           mkdir -p _site/assets
           cp web/index.html web/styles.css web/app.js web/language.js web/robots.txt web/sitemap.xml web/llms.txt _site/
           cp web/answer-data.example.js _site/answer-data.js
-          cp assets/logo.png assets/community-wechat.jpg assets/geo-visibility-monitor-cover.png _site/assets/
+          cp assets/logo.png assets/community-wechat.jpg assets/geo-visibility-lab-cover.png _site/assets/
           cp PROVIDERS.md _site/PROVIDERS.md
           touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v5

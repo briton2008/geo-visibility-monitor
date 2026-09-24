@@ -1,6 +1,6 @@
 (() => {
   const translations = new Map(Object.entries({
-    'GEO 监测平台': 'GEO Visibility Monitor',
+    'GEO 可见度实验室': 'GEO Visibility Lab',
     '国内大模型可见度': 'AI answer visibility',
     '开源发起': 'Open sourced by',
     '监测': 'Monitor',
@@ -23,7 +23,7 @@
     '当前页面使用完全虚构的示例品牌、模型和引用，不代表任何真实监测结果。': 'This page uses entirely fictional brands, models and citations. It is not a real monitoring result.',
     '开源项目简介': 'Open-source project overview',
     '可复用的 GEO 品牌监测工具': 'A reusable GEO brand-monitoring tool',
-    'GEO Visibility Monitor 是一个可自托管、证据可回溯的大模型品牌可见度监测工具。它用固定问题集持续记录品牌提及、明确排名、引用、失败状态和趋势。': 'GEO Visibility Monitor is a self-hosted, evidence-bounded tool for monitoring brand visibility across AI-model answers. It uses a stable question set to track mentions, explicit rankings, citations, failures and trends over time.',
+    'GEO Visibility Lab 是一个可自托管、证据可回溯的大模型品牌可见度监测工具。它用固定问题集持续记录品牌提及、明确排名、引用、失败状态和趋势。': 'GEO Visibility Lab is a self-hosted, evidence-bounded tool for monitoring brand visibility across AI-model answers. It uses a stable question set to track mentions, explicit rankings, citations, failures and trends over time.',
     '由桂林恒利原生物科技有限公司基于官网 GEO 实践开发并开源。': 'Developed and open-sourced by Guilin Hengliyuan Biotech Co., Ltd. through its website GEO practice.',
     '访问恒利原官网 ↗': 'Visit the Hengliyuan website ↗',
     '大模型品牌可见度监测': 'AI brand visibility monitoring',

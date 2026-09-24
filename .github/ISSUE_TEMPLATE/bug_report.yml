@@ -1,0 +1,56 @@
+name: Bug report
+description: Report a reproducible problem without including API keys or private monitoring data.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for helping improve GEO Visibility Lab. Remove credentials, customer data and raw private answers before submitting."
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: v0.1.1 or commit SHA
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Dashboard
+        - Provider configuration
+        - Monitoring runner
+        - Scoring or evidence
+        - Plugin or skill installation
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: Include the smallest safe example that reproduces the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and sanitized logs
+      description: Keep timeout, rate-limit, API and unavailable states distinct. Do not paste secrets.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed API keys, private answers, customer information and other sensitive data.
+          required: true

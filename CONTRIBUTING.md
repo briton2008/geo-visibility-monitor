@@ -1,6 +1,6 @@
 # Contributing
 
-感谢参与 GEO Visibility Monitor。Please keep contributions small, testable and evidence-bounded.
+感谢参与 GEO Visibility Lab。Please keep contributions small, testable and evidence-bounded.
 
 ## Development
 

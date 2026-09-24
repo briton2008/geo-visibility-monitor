@@ -1,9 +1,9 @@
 ---
-name: geo-visibility-monitor
-description: Configure, run, diagnose, or report the GEO Visibility Monitor in this repository. Use for brand setup, provider connections, scheduled AI-answer monitoring, ranking trends, citation evidence, cost estimates, and evidence-bounded recommendations.
+name: geo-visibility-lab
+description: Configure, run, diagnose, or report the GEO Visibility Lab in this repository. Use for brand setup, provider connections, scheduled AI-answer monitoring, ranking trends, citation evidence, cost estimates, and evidence-bounded recommendations.
 ---
 
-# GEO Visibility Monitor
+# GEO Visibility Lab
 
 Operate the repository's self-hosted monitor without collapsing distinct evidence layers or hiding failures.
 

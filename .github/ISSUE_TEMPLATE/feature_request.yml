@@ -1,0 +1,31 @@
+name: Feature request
+description: Propose a focused improvement to the monitor, dashboard or integrations.
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Describe the monitoring or reporting problem before proposing a solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed outcome
+      description: Explain what a successful implementation should make possible.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and edge cases
+      description: Note failure states, data-boundary or compatibility concerns when relevant.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope check
+      options:
+        - label: This request does not require publishing private monitoring data or credentials.
+          required: true

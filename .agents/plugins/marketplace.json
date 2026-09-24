@@ -1,14 +1,14 @@
 {
-  "name": "geo-visibility-monitor",
+  "name": "geo-visibility-lab",
   "interface": {
-    "displayName": "GEO Visibility Monitor"
+    "displayName": "GEO Visibility Lab"
   },
   "plugins": [
     {
-      "name": "geo-visibility-monitor",
+      "name": "geo-visibility-lab",
       "source": {
         "source": "url",
-        "url": "https://github.com/briton2008/geo-visibility-monitor.git",
+        "url": "https://github.com/briton2008/geo-visibility-lab.git",
         "ref": "main"
       },
       "policy": {
